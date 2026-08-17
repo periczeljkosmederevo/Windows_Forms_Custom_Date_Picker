@@ -25,6 +25,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Windows_Forms_Custom_Month_Calendar_Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Icons\TM 500.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
