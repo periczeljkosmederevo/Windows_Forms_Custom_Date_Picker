@@ -17,7 +17,7 @@
 
 #### Prerequisites
 
-* .NET 8.0 (or compatible modern .NET target supporting Windows Forms) with Visual Studio.
+* .NET 10.0 (or compatible modern .NET target supporting Windows Forms) with Visual Studio.
 
 #### Installation
 
