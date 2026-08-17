@@ -8,7 +8,7 @@
 
 * **Custom Date-Time Picker:** A robust, standalone Windows Forms control combining standard input handling with an interactive calendar drop-down.
 * **Integrated Calendar Control:** Built-in monthly calendar component designed to work seamlessly out-of-the-box with the picker interface.
-* **Culture & Regional Support:** Allows per-control culture configuration for tailored date, time, and calendar display based on specific regional settings.
+* **Culture & Regional Support:** Allows per-control culture configuration for tailored date, and calendar display based on specific regional settings.
 * **NuGet Ready:** Structured and packaged for quick integration and easy deployment as a reusable NuGet package.
 
 ---
@@ -21,7 +21,7 @@
 
 #### Installation
 
-* Clone the repository: `git clone [https://github.com/periczeljkosmederevo/Windows_Forms_Custom_Date_Picker.git](https://github.com/periczeljkosmederevo/Windows_Forms_Custom_Date_Picker.git)`
+* Clone the repository: `git clone` [https://github.com/periczeljkosmederevo/Windows_Forms_Custom_Date_Picker.git](https://github.com/periczeljkosmederevo/Windows_Forms_Custom_Date_Picker.git)
 * Open the project solution in Visual Studio.
 * Build the project or generate the NuGet package locally via the **Pack** option.
 
