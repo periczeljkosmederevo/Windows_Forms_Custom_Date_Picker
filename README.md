@@ -1,15 +1,15 @@
-# AI_Personality_Prompt_Generator
+# Windows_Forms_Custom_Date_Picker
 
-**AI_Personality_Prompt_Generator** is a tool designed to quickly create, structure, and customize system prompts that define the tone, behavior, communication style, and overall personality of AI models for specific chats or sessions.
+**Windows_Forms_Custom_Date_Picker** is a specialized open-source custom control library for Windows Forms, designed to provide a highly flexible date-time picker component featuring an integrated, fully customizable monthly calendar.
 
 ---
 
 ### 🚀 Key Features
 
-* **Identity Definition:** Easily configure the AI assistant's name, role, core expertise, and background.
-* **Tone & Style Control:** Precisely define communication guidelines (e.g., formal, friendly, professional, concise, or humorous).
-* **Boundaries & Rules:** Set specific constraints, ethical frameworks, and operational guidelines the model must follow.
-* **Quick Export/Import:** Generate clean, optimized text output ready for direct use as a system prompt in AI environments.
+* **Custom Date-Time Picker:** A robust, standalone Windows Forms control combining standard input handling with an interactive calendar drop-down.
+* **Integrated Calendar Control:** Built-in monthly calendar component designed to work seamlessly out-of-the-box with the picker interface.
+* **Culture & Regional Support:** Allows per-control culture configuration for tailored date, time, and calendar display based on specific regional settings.
+* **NuGet Ready:** Structured and packaged for quick integration and easy deployment as a reusable NuGet package.
 
 ---
 
@@ -17,27 +17,27 @@
 
 #### Prerequisites
 
-* Compatible environment or platform to run the generator tool.
+* .NET 8.0 (or compatible modern .NET target supporting Windows Forms) with Visual Studio.
 
 #### Installation
 
-* Clone the repository: `git clone [https://github.com/periczeljkosmederevo/AI_Personality_Prompt_Generator.git](https://github.com/periczeljkosmederevo/AI_Personality_Prompt_Generator.git)`
-* Open the project in your preferred code editor or IDE.
-* Build and run the project according to your environment setup.
+* Clone the repository: `git clone [https://github.com/periczeljkosmederevo/Windows_Forms_Custom_Date_Picker.git](https://github.com/periczeljkosmederevo/Windows_Forms_Custom_Date_Picker.git)`
+* Open the project solution in Visual Studio.
+* Build the project or generate the NuGet package locally via the **Pack** option.
 
 ---
 
 ### Usage
 
-1. Launch the tool and input your desired personality parameters (role, tone, target audience, specific rules).
-2. Generate the system prompt based on your configured parameters.
-3. Copy the resulting prompt and paste it into your AI model's system prompt settings or chat initialization.
+1. Add the control library reference or install the package into your Windows Forms application.
+2. Drag and drop the custom picker control from the toolbox onto your form layout.
+3. Configure properties such as culture settings, date formats, or visual styles directly via the designer or programmatically in code.
 
 ---
 
 ### License
 
-This project is licensed under the CC0 1.0 Universal - see the [LICENSE](https://github.com/periczeljkosmederevo/AI_Personality_Prompt_Generator/blob/master/LICENSE.txt) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://www.google.com/search?q=https://github.com/periczeljkosmederevo/Windows_Forms_Custom_Date_Picker/blob/master/LICENSE.txt) file for details.
 
 ---
 
