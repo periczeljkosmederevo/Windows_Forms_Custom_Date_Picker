@@ -5,7 +5,6 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationIcon>Icons\TM 500.png</ApplicationIcon>
     <Title>Windows_Forms_Custom_Date_Picker</Title>
     <Authors>Perić Željko, periczeljkosmederevo@yahoo.com</Authors>
     <Description>Custom Windows Forms DatePicker control designed for full localization support, independent of system regional settings. Allows per-control culture configuration for date and calendar display.</Description>
