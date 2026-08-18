@@ -1,57 +1,58 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net10.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWindowsForms>true</UseWindowsForms>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Title>Windows_Forms_Custom_Date_Picker</Title>
-    <Authors>Perić Željko, periczeljkosmederevo@yahoo.com</Authors>
-    <Description>Custom Windows Forms DatePicker control designed for full localization support, independent of system regional settings. Allows per-control culture configuration for date and calendar display.</Description>
-    <Copyright>Copyright ©  2026</Copyright>
-    <PackageIcon>TM 500.png</PackageIcon>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>Windows Forms;Custom; DatePicker;Windows Forms Custom Date Picker</PackageTags>
-    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <IncludeSymbols>True</IncludeSymbols>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageProjectUrl>https://github.com/periczeljkosmederevo/Windows_Forms_Custom_Date_Picker</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/periczeljkosmederevo/Windows_Forms_Custom_Date_Picker</RepositoryUrl>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net10.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Title>Windows_Forms_Custom_Date_Picker</Title>
+		<Authors>Perić Željko, periczeljkosmederevo@yahoo.com</Authors>
+		<Description>Custom Windows Forms DatePicker control designed for full localization support, independent of system regional settings. Allows per-control culture configuration for date and calendar display.</Description>
+		<Copyright>Copyright ©  2026</Copyright>
+		<PackageIcon>TM 500.png</PackageIcon>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>Windows Forms;Custom; DatePicker;Windows Forms Custom Date Picker</PackageTags>
+		<PackageReleaseNotes>Initial release</PackageReleaseNotes>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<IncludeSymbols>True</IncludeSymbols>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageProjectUrl>https://github.com/periczeljkosmederevo/Windows_Forms_Custom_Date_Picker</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/periczeljkosmederevo/Windows_Forms_Custom_Date_Picker</RepositoryUrl>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Windows_Forms_Custom_Date_Picker_Test\**" />
-    <EmbeddedResource Remove="Windows_Forms_Custom_Date_Picker_Test\**" />
-    <None Remove="Windows_Forms_Custom_Date_Picker_Test\**" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Windows_Forms_Custom_Date_Picker_Test\**" />
+		<EmbeddedResource Remove="Windows_Forms_Custom_Date_Picker_Test\**" />
+		<None Remove="Windows_Forms_Custom_Date_Picker_Test\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Content Include="Icons\TM 500.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+	<ItemGroup>
+		<Content Include="Icons\TM 500.png">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Windows_Forms_Custom_Month_Calendar_Control.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Update="Windows_Forms_Custom_Month_Calendar_Control.cs">
+			<SubType>UserControl</SubType>
+		</Compile>
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Update="Icons\TM 500.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Update="LICENSE.txt">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Update="README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Update="Icons\TM 500.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
+		<None Update="LICENSE.txt">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Update="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
 </Project>
