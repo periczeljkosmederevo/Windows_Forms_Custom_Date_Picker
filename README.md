@@ -1,12 +1,12 @@
 # Windows_Forms_Custom_Date_Picker
 
-**Windows_Forms_Custom_Date_Picker** is a specialized open-source custom control library for Windows Forms, designed to provide a highly flexible date-time picker component featuring an integrated, fully customizable monthly calendar.
+**Windows_Forms_Custom_Date_Picker** is a specialized open-source custom control library for Windows Forms, designed to provide a highly flexible date picker component featuring an integrated, fully customizable monthly calendar.
 
 ---
 
 ### 🚀 Key Features
 
-* **Custom Date-Time Picker:** A robust, standalone Windows Forms control combining standard input handling with an interactive calendar drop-down.
+* **Custom Date Picker:** A robust, standalone Windows Forms control combining standard input handling with an interactive calendar drop-down.
 * **Integrated Calendar Control:** Built-in monthly calendar component designed to work seamlessly out-of-the-box with the picker interface.
 * **Culture & Regional Support:** Allows per-control culture configuration for tailored date, and calendar display based on specific regional settings.
 * **NuGet Ready:** Structured and packaged for quick integration and easy deployment as a reusable NuGet package.
@@ -47,3 +47,6 @@ For technical inquiries or administrative follow-ups, please contact:
 
 * **Name:** Željko Perić
 * **Email:** periczeljkosmederevo@yahoo.com
+
+---
+

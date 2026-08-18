@@ -17,7 +17,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     private DateTime _value = DateTime.Today;
     private DateTime _minDate = DateTime.MinValue.Date;
     private DateTime _maxDate = DateTime.MaxValue.Date;
-    private string _customFormat = "dd.MM.yyyy";
+    private string _customFormat = "   ddd,  dd. MMMM yyyy";
     private DayOfWeek _firstDayOfWeek = DayOfWeek.Monday;
     private bool _showTodayButton = false;
     private bool _showWeekNumbers = false;
@@ -328,7 +328,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     [Category("Appearance")]
     [Description(
         "Format used when the selected date is represented as text.")]
-    [DefaultValue("dd.MM.yyyy")]
+    [DefaultValue("   ddd,  dd. MMMM yyyy")]
     [DesignerSerializationVisibility(
         DesignerSerializationVisibility.Visible)]
     public string CustomFormat
@@ -339,7 +339,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         {
             _customFormat =
                 string.IsNullOrWhiteSpace(value)
-                    ? "dd.MM.yyyy"
+                    ? "   ddd,  dd. MMMM yyyy"
                     : value;
 
             Invalidate();

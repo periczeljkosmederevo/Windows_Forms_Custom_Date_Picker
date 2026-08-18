@@ -19,6 +19,7 @@
 		<PackageProjectUrl>https://github.com/periczeljkosmederevo/Windows_Forms_Custom_Date_Picker</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/periczeljkosmederevo/Windows_Forms_Custom_Date_Picker</RepositoryUrl>
 		<PackageIcon>TM 500.png</PackageIcon>
+		<Version>1.0.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>

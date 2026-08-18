@@ -172,7 +172,7 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
 
     [Category("Appearance")]
     [Description("Format used to display the selected date.")]
-    [DefaultValue("d")]
+    [DefaultValue("   ddd,  dd. MMMM yyyy")]
     public string CustomFormat
     {
         get => _customFormat;
@@ -395,7 +395,7 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
         }
         catch (FormatException)
         {
-            _textBox.Text = _value.ToString("d", _culture);
+            _textBox.Text = _value.ToString("   ddd,  dd. MMMM yyyy", _culture);
         }
     }
 

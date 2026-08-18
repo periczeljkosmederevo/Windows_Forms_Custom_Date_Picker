@@ -336,7 +336,6 @@ partial class Form1
         windows_Forms_Custom_Date_Picker_Control1.CalendarHeaderFont = new Font("Comic Sans MS", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
         windows_Forms_Custom_Date_Picker_Control1.CalendarTodayButtonFont = new Font("Comic Sans MS", 14.25F, FontStyle.Bold | FontStyle.Italic);
         windows_Forms_Custom_Date_Picker_Control1.Culture = new System.Globalization.CultureInfo("sr-Latn-RS");
-        windows_Forms_Custom_Date_Picker_Control1.CustomFormat = "   ddd,  dd. MMMM yyyy";
         windows_Forms_Custom_Date_Picker_Control1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
         windows_Forms_Custom_Date_Picker_Control1.Location = new Point(134, 46);
         windows_Forms_Custom_Date_Picker_Control1.Margin = new Padding(5, 6, 5, 6);
