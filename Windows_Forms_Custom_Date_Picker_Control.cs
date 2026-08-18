@@ -60,7 +60,7 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
             MinDate = _minDate,
             MaxDate = _maxDate,
             FirstDayOfWeek = _firstDayOfWeek,
-            ShowTodayButton = _showTodayButton,
+            CalendarTodayButtonVisible = _showTodayButton,
             ShowWeekNumbers = _showWeekNumbers
         };
 
@@ -111,7 +111,7 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
     [Category("Appearance")]
     [Description("Font used for the calendar days.")]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-    public Font CalendarDayFont
+    public Font CalendarDaysFont
     {
         get => _calendar.CalendarDaysFont;
         set => _calendar.CalendarDaysFont = value;
@@ -133,6 +133,16 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
     {
         get => _calendar.CalendarTodayButtonFont;
         set => _calendar.CalendarTodayButtonFont = value;
+    }
+
+    [Category("Appearance")]
+    [Description("Determines whether the Today button is displayed in the calendar.")]
+    [DefaultValue(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    public bool CalendarTodayButtonVisible
+    {
+        get => _calendar.CalendarTodayButtonVisible;
+        set => _calendar.CalendarTodayButtonVisible = value;
     }
 
     #endregion
@@ -277,7 +287,7 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
                 return;
 
             _showTodayButton = value;
-            _calendar.ShowTodayButton = value;
+            _calendar.CalendarTodayButtonVisible = value;
         }
     }
 
