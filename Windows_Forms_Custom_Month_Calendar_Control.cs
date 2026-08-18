@@ -130,7 +130,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
 
         _todayButton = new Button
         {
-            Text = "Today",
+            Text = GetLocalizedTodayText(),
             Dock = DockStyle.Bottom,
             Height = 32,
             FlatStyle = FlatStyle.Flat,
@@ -313,6 +313,11 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
                 return;
 
             _culture = value;
+
+            if (_todayButton != null)
+            {
+                _todayButton.Text = GetLocalizedTodayText();
+            }
 
             if (_isInitializing)
                 return;
@@ -606,6 +611,51 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
                 1);
 
         UpdateCalendar();
+    }
+
+    /// <summary>
+    /// Retrieves the localized text for the "Today" button based on the current culture.
+    /// Supports specific regional variants (e.g., Serbian Cyrillic/Latin) and 
+    /// falls back to a default switch expression for standard language codes, 
+    /// defaulting to English ("Today") for unhandled cultures.
+    /// </summary>
+    private string GetLocalizedTodayText()
+    {
+        // Obtain the full culture name and the two-letter ISO language name in lowercase.
+        string cultureName = _culture.Name.ToLowerInvariant();
+        string languageCode = _culture.TwoLetterISOLanguageName.ToLowerInvariant();
+
+        // Explicitly handle Serbian regional script variants.
+        if (cultureName.Contains("sr-latn") || cultureName == "sr-latn")
+            return "Danas";
+        if (cultureName.Contains("sr-cyrl") || cultureName == "sr-cyrl")
+            return "Данас";
+
+        // Match the two-letter language code against supported translations.
+        return languageCode switch
+        {
+            "ar" => "اليوم",
+            "bn" => "आज",
+            "de" => "Heute",
+            "el" => "Σήμερα",
+            "es" => "Hoy",
+            "fr" => "Aujourd'hui",
+            "hi" => "आज",
+            "id" => "Hari Ini",
+            "it" => "Oggi",
+            "ja" => "今日",
+            "ko" => "오늘",
+            "nl" => "Vandaag",
+            "pl" => "Dzisiaj",
+            "pt" => "Hoje",
+            "ru" => "Сегодня",
+            "sr" => "Danas",
+            "sw" => "Leo",
+            "tr" => "Bugün",
+            "vi" => "Hôm nay",
+            "zh" => "今天",
+            _ => "Today" // Fallback default value for unmatched languages.
+        };
     }
 
     #endregion
