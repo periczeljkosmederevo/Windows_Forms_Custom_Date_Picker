@@ -39,6 +39,7 @@
 * This project is licensed under the [CC0-1.0 license (Public Domain)](LICENSE.txt). 
 * Feel free to use, modify, and distribute the code without any restrictions. 
 * You can view the full legal text at [Creative Commons CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/).
+
 ---
 
 ### Support
