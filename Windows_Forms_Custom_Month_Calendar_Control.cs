@@ -248,6 +248,13 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
                     _headerFont;
             }
 
+            if (_previousMonthButton != null)
+                _previousMonthButton.Font = _headerFont;
+
+            if (_nextMonthButton != null)
+                _nextMonthButton.Font = _headerFont;
+
+
             // Recalculate the calendar height
             // according to the new header font.
             UpdateCalendar();
