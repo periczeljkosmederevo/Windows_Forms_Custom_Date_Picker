@@ -36,9 +36,11 @@
 ---
 
 ### License
-* This project is licensed under the [CC0-1.0 license (Public Domain)](LICENSE.txt). 
-* Feel free to use, modify, and distribute the code without any restrictions. 
-* You can view the full legal text at [Creative Commons CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/).
+
+* This project is licensed under the [CC0-1.0 license (Public Domain)](LICENSE.txt).
+* To the extent possible under law, the author(s) have dedicated all copyright and related rights to this software to the public domain worldwide.
+* Feel free to use, modify, and distribute the code without any restrictions.
+* For more details, see the [LICENSE](LICENSE.txt) file or view the full legal text at [Creative Commons CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/).
 
 ---
 
