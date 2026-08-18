@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Windows_Forms_Custom_Date_Picker.csproj" />
-    <ProjectReference Include="..\Windows_Forms_Custom_Date_Picker\Windows_Forms_Custom_Date_Picker.csproj" />
   </ItemGroup>
 
 </Project>
