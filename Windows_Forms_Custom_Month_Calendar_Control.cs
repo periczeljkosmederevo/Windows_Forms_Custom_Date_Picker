@@ -9,7 +9,7 @@ namespace Windows_Forms_Custom_Date_Picker;
 /// date selection, minimum and maximum dates, week numbers,
 /// navigation and a Today button.
 /// </summary>
-public partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
+internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
 {
     #region Fields
 

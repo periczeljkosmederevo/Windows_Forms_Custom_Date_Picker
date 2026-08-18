@@ -18,7 +18,7 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
     private DateTime _minDate = DateTime.MinValue;
     private DateTime _maxDate = DateTime.MaxValue;
 
-    private DayOfWeek _firstDayOfWeek = DayOfWeek.Sunday;
+    private DayOfWeek _firstDayOfWeek = DayOfWeek.Monday;
     private bool _showTodayButton = true;
     private bool _showWeekNumbers;
     private bool _internalUpdate;
@@ -296,9 +296,6 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
             _calendar.ShowWeekNumbers = value;
         }
     }
-
-    [Browsable(false)]
-    public Windows_Forms_Custom_Month_Calendar_Control Calendar => _calendar;
 
     #endregion
 
