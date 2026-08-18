@@ -69,14 +69,4 @@ public partial class Form1 : Form
         // OVDE se automatski postavlja kultura na vaš picker:
         windows_Forms_Custom_Date_Picker_Control1.Culture = new CultureInfo(langCode);
     }
-
-    private void EnglishButton_Click(object sender, EventArgs e)
-    {
-        windows_Forms_Custom_Date_Picker_Control1.Culture = new CultureInfo("en-US");
-    }
-
-    private void SerbianButton_Click(object sender, EventArgs e)
-    {
-        windows_Forms_Custom_Date_Picker_Control1.Culture = new CultureInfo("sr-Latn-RS");
-    }
 }
