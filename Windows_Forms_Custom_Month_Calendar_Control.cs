@@ -7,7 +7,7 @@ namespace Windows_Forms_Custom_Date_Picker;
 /// Represents a customizable Windows Forms calendar control
 /// that supports culture-specific month and day names,
 /// date selection, minimum and maximum dates, week numbers,
-/// navigation and a Today button.
+/// navigation, custom fonts and a Today button.
 /// </summary>
 internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
 {
@@ -27,9 +27,16 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     private bool _isUpdatingCalendar = false;
 
     private Font _dayFont = SystemFonts.DefaultFont;
-    private Font _headerFont = new Font(SystemFonts.DefaultFont, FontStyle.Bold);
-    private Font _todayButtonFont = SystemFonts.DefaultFont;
 
+    private Font _headerFont =
+        new Font(
+            SystemFonts.DefaultFont,
+            FontStyle.Bold);
+
+    private Font _todayButtonFont =
+        SystemFonts.DefaultFont;
+
+    private readonly Panel _headerPanel;
     private readonly Button _previousMonthButton;
     private readonly Button _nextMonthButton;
     private readonly Label _monthYearLabel;
@@ -69,7 +76,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
             _value.Month,
             1);
 
-        var headerPanel = new Panel
+        _headerPanel = new Panel
         {
             Dock = DockStyle.Top,
             Height = 42,
@@ -100,12 +107,14 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         {
             Dock = DockStyle.Fill,
             TextAlign = ContentAlignment.MiddleCenter,
+
+            // Use the dedicated header font.
             Font = _headerFont
         };
 
-        headerPanel.Controls.Add(_monthYearLabel);
-        headerPanel.Controls.Add(_previousMonthButton);
-        headerPanel.Controls.Add(_nextMonthButton);
+        _headerPanel.Controls.Add(_monthYearLabel);
+        _headerPanel.Controls.Add(_previousMonthButton);
+        _headerPanel.Controls.Add(_nextMonthButton);
 
         _calendarTable = new TableLayoutPanel
         {
@@ -113,7 +122,8 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
             ColumnCount = 7,
             RowCount = 7,
             Padding = new Padding(4),
-            CellBorderStyle = TableLayoutPanelCellBorderStyle.None
+            CellBorderStyle =
+                TableLayoutPanelCellBorderStyle.None
         };
 
         _todayButton = new Button
@@ -122,6 +132,8 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
             Dock = DockStyle.Bottom,
             Height = 32,
             FlatStyle = FlatStyle.Flat,
+
+            // Use the dedicated Today button font.
             Font = _todayButtonFont
         };
 
@@ -129,14 +141,22 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
 
         Controls.Add(_calendarTable);
         Controls.Add(_todayButton);
-        Controls.Add(headerPanel);
+        Controls.Add(_headerPanel);
 
-        _previousMonthButton.Click += PreviousMonthButton_Click;
-        _nextMonthButton.Click += NextMonthButton_Click;
-        _todayButton.Click += TodayButton_Click;
+        _previousMonthButton.Click +=
+            PreviousMonthButton_Click;
 
-        Resize += CustomMonthCalendar_Resize;
-        FontChanged += CustomMonthCalendar_FontChanged;
+        _nextMonthButton.Click +=
+            NextMonthButton_Click;
+
+        _todayButton.Click +=
+            TodayButton_Click;
+
+        Resize +=
+            CustomMonthCalendar_Resize;
+
+        FontChanged +=
+            CustomMonthCalendar_FontChanged;
 
         _isInitializing = false;
 
@@ -147,18 +167,26 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
 
     #region Properties
 
+    /// <summary>
+    /// Gets or sets the base font of the calendar control.
+    /// </summary>
     [Browsable(true)]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [DesignerSerializationVisibility(
+        DesignerSerializationVisibility.Visible)]
     public override Font Font
     {
         get => base.Font;
+
         set
         {
             base.Font = value;
 
             if (_monthYearLabel != null)
             {
-                _monthYearLabel.Font = new Font(value, FontStyle.Bold);
+                _monthYearLabel.Font =
+                    new Font(
+                        value,
+                        FontStyle.Bold);
             }
 
             if (_todayButton != null)
@@ -170,61 +198,107 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         }
     }
 
+    /// <summary>
+    /// Gets or sets the font used for calendar day numbers
+    /// and abbreviated day names.
+    /// </summary>
     [Category("Appearance")]
-    [Description("Font used for the calendar days.")]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Description(
+        "Font used for the calendar days.")]
+    [DesignerSerializationVisibility(
+        DesignerSerializationVisibility.Visible)]
     public Font CalendarDaysFont
     {
         get => _dayFont;
+
         set
         {
-            _dayFont = value ?? SystemFonts.DefaultFont;
+            _dayFont =
+                value ?? SystemFonts.DefaultFont;
+
             UpdateCalendar();
         }
     }
 
+    /// <summary>
+    /// Gets or sets the font used for the month and year header.
+    /// </summary>
     [Category("Appearance")]
-    [Description("Font used for the month and year header.")]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Description(
+        "Font used for the month and year header.")]
+    [DesignerSerializationVisibility(
+        DesignerSerializationVisibility.Visible)]
     public Font CalendarHeaderFont
     {
         get => _headerFont;
+
         set
         {
-            _headerFont = value ?? new Font(SystemFonts.DefaultFont, FontStyle.Bold);
+            _headerFont =
+                value ??
+                new Font(
+                    SystemFonts.DefaultFont,
+                    FontStyle.Bold);
+
             if (_monthYearLabel != null)
             {
-                _monthYearLabel.Font = _headerFont;
+                _monthYearLabel.Font =
+                    _headerFont;
             }
+
+            // Recalculate the calendar height
+            // according to the new header font.
+            UpdateCalendar();
         }
     }
 
+    /// <summary>
+    /// Gets or sets the font used for the Today button.
+    /// </summary>
     [Category("Appearance")]
-    [Description("Font used for the Today button.")]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Description(
+        "Font used for the Today button.")]
+    [DesignerSerializationVisibility(
+        DesignerSerializationVisibility.Visible)]
     public Font CalendarTodayButtonFont
     {
         get => _todayButtonFont;
+
         set
         {
-            _todayButtonFont = value ?? SystemFonts.DefaultFont;
+            _todayButtonFont =
+                value ?? SystemFonts.DefaultFont;
+
             if (_todayButton != null)
             {
-                _todayButton.Font = _todayButtonFont;
+                _todayButton.Font =
+                    _todayButtonFont;
             }
+
+            // Recalculate the calendar height
+            // according to the new Today button font.
+            UpdateCalendar();
         }
     }
 
+    /// <summary>
+    /// Gets or sets the culture used to display
+    /// month and day names.
+    /// </summary>
     [Category("Localization")]
-    [Description("Culture used to display month and day names.")]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Description(
+        "Culture used to display month and day names.")]
+    [DesignerSerializationVisibility(
+        DesignerSerializationVisibility.Visible)]
     public CultureInfo Culture
     {
         get => _culture;
+
         set
         {
             if (value == null)
-                throw new ArgumentNullException(nameof(value));
+                throw new ArgumentNullException(
+                    nameof(value));
 
             if (_culture.Equals(value))
                 return;
@@ -238,32 +312,47 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         }
     }
 
+    /// <summary>
+    /// Gets or sets the format used when the selected
+    /// date is represented as text.
+    /// </summary>
     [Category("Appearance")]
-    [Description("Format used when the selected date is represented as text.")]
+    [Description(
+        "Format used when the selected date is represented as text.")]
     [DefaultValue("dd.MM.yyyy")]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [DesignerSerializationVisibility(
+        DesignerSerializationVisibility.Visible)]
     public string CustomFormat
     {
         get => _customFormat;
+
         set
         {
-            _customFormat = string.IsNullOrWhiteSpace(value)
-                ? "dd.MM.yyyy"
-                : value;
+            _customFormat =
+                string.IsNullOrWhiteSpace(value)
+                    ? "dd.MM.yyyy"
+                    : value;
 
             Invalidate();
         }
     }
 
+    /// <summary>
+    /// Gets or sets the currently selected date.
+    /// </summary>
     [Category("Behavior")]
-    [Description("Currently selected date.")]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Description(
+        "Currently selected date.")]
+    [DesignerSerializationVisibility(
+        DesignerSerializationVisibility.Visible)]
     public DateTime Value
     {
         get => _value;
+
         set
         {
-            DateTime newValue = value.Date;
+            DateTime newValue =
+                value.Date;
 
             if (newValue < MinDate)
                 newValue = MinDate;
@@ -276,10 +365,11 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
 
             _value = newValue;
 
-            _displayedMonth = new DateTime(
-                _value.Year,
-                _value.Month,
-                1);
+            _displayedMonth =
+                new DateTime(
+                    _value.Year,
+                    _value.Month,
+                    1);
 
             UpdateCalendar();
 
@@ -289,18 +379,28 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         }
     }
 
+    /// <summary>
+    /// Gets or sets the minimum selectable date.
+    /// </summary>
     [Category("Behavior")]
-    [Description("Minimum selectable date.")]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Description(
+        "Minimum selectable date.")]
+    [DesignerSerializationVisibility(
+        DesignerSerializationVisibility.Visible)]
     public DateTime MinDate
     {
         get => _minDate;
+
         set
         {
-            DateTime newValue = value.Date;
+            DateTime newValue =
+                value.Date;
 
             if (newValue > _maxDate)
-                throw new ArgumentException("MinDate cannot be greater than MaxDate.");
+            {
+                throw new ArgumentException(
+                    "MinDate cannot be greater than MaxDate.");
+            }
 
             _minDate = newValue;
 
@@ -311,18 +411,28 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         }
     }
 
+    /// <summary>
+    /// Gets or sets the maximum selectable date.
+    /// </summary>
     [Category("Behavior")]
-    [Description("Maximum selectable date.")]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Description(
+        "Maximum selectable date.")]
+    [DesignerSerializationVisibility(
+        DesignerSerializationVisibility.Visible)]
     public DateTime MaxDate
     {
         get => _maxDate;
+
         set
         {
-            DateTime newValue = value.Date;
+            DateTime newValue =
+                value.Date;
 
             if (newValue < _minDate)
-                throw new ArgumentException("MaxDate cannot be less than MinDate.");
+            {
+                throw new ArgumentException(
+                    "MaxDate cannot be less than MinDate.");
+            }
 
             _maxDate = newValue;
 
@@ -333,13 +443,20 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         }
     }
 
+    /// <summary>
+    /// Gets or sets the first day of the week displayed
+    /// in the calendar.
+    /// </summary>
     [Category("Appearance")]
-    [Description("First day of the week displayed in the calendar.")]
+    [Description(
+        "First day of the week displayed in the calendar.")]
     [DefaultValue(DayOfWeek.Monday)]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [DesignerSerializationVisibility(
+        DesignerSerializationVisibility.Visible)]
     public DayOfWeek FirstDayOfWeek
     {
         get => _firstDayOfWeek;
+
         set
         {
             if (_firstDayOfWeek == value)
@@ -351,29 +468,51 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         }
     }
 
+    /// <summary>
+    /// Gets or sets a value indicating whether the Today button
+    /// is displayed.
+    /// </summary>
     [Category("Appearance")]
-    [Description("Determines whether the Today button is displayed.")]
+    [Description(
+        "Determines whether the Today button is displayed.")]
     [DefaultValue(true)]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [DesignerSerializationVisibility(
+        DesignerSerializationVisibility.Visible)]
     public bool CalendarTodayButtonVisible
     {
         get => _showTodayButton;
+
         set
         {
+            if (_showTodayButton == value)
+                return;
+
             _showTodayButton = value;
 
             if (_todayButton != null)
-                _todayButton.Visible = value;
+            {
+                _todayButton.Visible =
+                    value;
+            }
+
+            UpdateCalendar();
         }
     }
 
+    /// <summary>
+    /// Gets or sets a value indicating whether week numbers
+    /// are displayed.
+    /// </summary>
     [Category("Appearance")]
-    [Description("Determines whether week numbers are displayed.")]
+    [Description(
+        "Determines whether week numbers are displayed.")]
     [DefaultValue(false)]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [DesignerSerializationVisibility(
+        DesignerSerializationVisibility.Visible)]
     public bool ShowWeekNumbers
     {
         get => _showWeekNumbers;
+
         set
         {
             if (_showWeekNumbers == value)
@@ -385,8 +524,13 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         }
     }
 
+    /// <summary>
+    /// Gets the selected date formatted according to
+    /// the current CustomFormat and Culture settings.
+    /// </summary>
     [Browsable(false)]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    [DesignerSerializationVisibility(
+        DesignerSerializationVisibility.Hidden)]
     public string ValueText =>
         _value.ToString(
             _customFormat,
@@ -397,7 +541,8 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     #region Methods
 
     /// <summary>
-    /// Returns the selected date formatted according to the current CustomFormat and Culture settings.
+    /// Returns the selected date formatted according to
+    /// the current CustomFormat and Culture settings.
     /// </summary>
     public string GetFormattedValue() =>
         Value.ToString(
@@ -405,16 +550,28 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
             Culture);
 
     /// <summary>
-    /// Displays the specified month and year if they are within the configured minimum and maximum date range.
+    /// Displays the specified month and year if they are
+    /// within the configured minimum and maximum date range.
     /// </summary>
-    public void GoToMonth(int year, int month)
+    public void GoToMonth(
+        int year,
+        int month)
     {
         if (month < 1 || month > 12)
-            throw new ArgumentOutOfRangeException(nameof(month));
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(month));
+        }
 
-        DateTime requestedMonth = new DateTime(year, month, 1);
+        DateTime requestedMonth =
+            new DateTime(
+                year,
+                month,
+                1);
 
-        if (requestedMonth.AddMonths(1).AddDays(-1) < MinDate)
+        if (requestedMonth
+                .AddMonths(1)
+                .AddDays(-1) < MinDate)
         {
             return;
         }
@@ -422,7 +579,8 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         if (requestedMonth > MaxDate)
             return;
 
-        _displayedMonth = requestedMonth;
+        _displayedMonth =
+            requestedMonth;
 
         UpdateCalendar();
     }
@@ -432,10 +590,11 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     /// </summary>
     public void GoToSelectedDate()
     {
-        _displayedMonth = new DateTime(
-            Value.Year,
-            Value.Month,
-            1);
+        _displayedMonth =
+            new DateTime(
+                Value.Year,
+                Value.Month,
+                1);
 
         UpdateCalendar();
     }
@@ -444,63 +603,76 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
 
     #region Event Handlers
 
-    private void PreviousMonthButton_Click(object? sender, EventArgs e)
+    private void PreviousMonthButton_Click(
+        object? sender,
+        EventArgs e)
     {
         DateTime previousMonth;
 
         try
         {
-            previousMonth = _displayedMonth.AddMonths(-1);
+            previousMonth =
+                _displayedMonth.AddMonths(-1);
         }
         catch
         {
             return;
         }
 
-        DateTime lastDayOfPreviousMonth = new DateTime(
-            previousMonth.Year,
-            previousMonth.Month,
-            DateTime.DaysInMonth(
+        DateTime lastDayOfPreviousMonth =
+            new DateTime(
                 previousMonth.Year,
-                previousMonth.Month));
+                previousMonth.Month,
+                DateTime.DaysInMonth(
+                    previousMonth.Year,
+                    previousMonth.Month));
 
         if (lastDayOfPreviousMonth < MinDate)
             return;
 
-        _displayedMonth = previousMonth;
+        _displayedMonth =
+            previousMonth;
 
         UpdateCalendar();
     }
 
-    private void NextMonthButton_Click(object? sender, EventArgs e)
+    private void NextMonthButton_Click(
+        object? sender,
+        EventArgs e)
     {
         DateTime nextMonth;
 
         try
         {
-            nextMonth = _displayedMonth.AddMonths(1);
+            nextMonth =
+                _displayedMonth.AddMonths(1);
         }
         catch
         {
             return;
         }
 
-        DateTime firstDayOfNextMonth = new DateTime(
-            nextMonth.Year,
-            nextMonth.Month,
-            1);
+        DateTime firstDayOfNextMonth =
+            new DateTime(
+                nextMonth.Year,
+                nextMonth.Month,
+                1);
 
         if (firstDayOfNextMonth > MaxDate)
             return;
 
-        _displayedMonth = nextMonth;
+        _displayedMonth =
+            nextMonth;
 
         UpdateCalendar();
     }
 
-    private void TodayButton_Click(object? sender, EventArgs e)
+    private void TodayButton_Click(
+        object? sender,
+        EventArgs e)
     {
-        DateTime today = DateTime.Today;
+        DateTime today =
+            DateTime.Today;
 
         if (today < MinDate)
             today = MinDate;
@@ -508,14 +680,16 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         if (today > MaxDate)
             today = MaxDate;
 
-        bool valueChanged = _value != today;
+        bool valueChanged =
+            _value != today;
 
         _value = today;
 
-        _displayedMonth = new DateTime(
-            today.Year,
-            today.Month,
-            1);
+        _displayedMonth =
+            new DateTime(
+                today.Year,
+                today.Month,
+                1);
 
         UpdateCalendar();
 
@@ -527,23 +701,35 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         }
     }
 
-    private void CustomMonthCalendar_Resize(object? sender, EventArgs e)
+    private void CustomMonthCalendar_Resize(
+        object? sender,
+        EventArgs e)
     {
-        if (_isInitializing || _isUpdatingCalendar)
+        if (_isInitializing ||
+            _isUpdatingCalendar)
+        {
             return;
+        }
 
         UpdateCalendar();
     }
 
-    private void CustomMonthCalendar_FontChanged(object? sender, EventArgs e)
+    private void CustomMonthCalendar_FontChanged(
+        object? sender,
+        EventArgs e)
     {
-        if (_isInitializing || _isUpdatingCalendar)
+        if (_isInitializing ||
+            _isUpdatingCalendar)
+        {
             return;
+        }
 
         UpdateCalendar();
     }
 
-    private void DayButton_Click(object? sender, EventArgs e)
+    private void DayButton_Click(
+        object? sender,
+        EventArgs e)
     {
         if (sender is not Button button)
             return;
@@ -558,6 +744,10 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
 
     #region Calendar Internal Logic
 
+    /// <summary>
+    /// Rebuilds the calendar and recalculates its dimensions
+    /// according to the current culture, fonts and settings.
+    /// </summary>
     private void UpdateCalendar()
     {
         if (_isInitializing)
@@ -575,7 +765,10 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         {
             _calendarTable.SuspendLayout();
 
-            foreach (Control control in _calendarTable.Controls)
+            // Remove all previously generated controls.
+
+            foreach (Control control in
+                     _calendarTable.Controls)
             {
                 control.Dispose();
             }
@@ -583,63 +776,105 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
             _calendarTable.Controls.Clear();
             _dayButtons.Clear();
 
-            int columnCount = _showWeekNumbers ? 8 : 7;
+            // Determine the number of columns.
 
-            _calendarTable.ColumnCount = columnCount;
+            int columnCount =
+                _showWeekNumbers ? 8 : 7;
+
+            _calendarTable.ColumnCount =
+                columnCount;
+
             _calendarTable.RowCount = 7;
 
             _calendarTable.ColumnStyles.Clear();
             _calendarTable.RowStyles.Clear();
 
-            for (int i = 0; i < 7; i++)
-            {
-                _calendarTable.RowStyles.Add(
-                    new RowStyle(
-                        SizeType.Percent,
-                        100f / 7f));
-            }
+            // Calculate the required calendar width.
 
             AdjustDayColumnWidths();
 
-            _monthYearLabel.Text = _displayedMonth.ToString(
-                "MMMM yyyy",
-                _culture);
+            // Calculate the required calendar height.
+
+            AdjustCalendarHeight();
+
+            // Display the current month and year.
+
+            _monthYearLabel.Text =
+                _displayedMonth.ToString(
+                    "MMMM yyyy",
+                    _culture);
+
+            // Make sure the dedicated fonts
+            // are applied to the existing controls.
+
+            _monthYearLabel.Font =
+                _headerFont;
+
+            _todayButton.Font =
+                _todayButtonFont;
+
+            // Create the day-name header row.
 
             CreateDayHeaders();
+
+            // Create the calendar day buttons.
+
             CreateDays();
+
+            // Update the month navigation buttons.
+
             UpdateNavigationButtons();
         }
         finally
         {
             _calendarTable.ResumeLayout(true);
+
             _isUpdatingCalendar = false;
         }
     }
 
+    /// <summary>
+    /// Calculates and applies the required width of the calendar
+    /// according to the longest abbreviated day name.
+    /// </summary>
     private void AdjustDayColumnWidths()
     {
-        string[] dayNames = GetDayNames();
+        string[] dayNames =
+            GetDayNames();
 
-        using Font headerFont = new Font(
-            _dayFont.FontFamily,
-            _dayFont.Size,
-            FontStyle.Bold);
+        using Font headerFont =
+            new Font(
+                _dayFont.FontFamily,
+                _dayFont.Size,
+                FontStyle.Bold);
+
+        // Find the widest abbreviated day name.
 
         int maxWidth = 0;
 
         foreach (string dayName in dayNames)
         {
-            Size measuredSize = TextRenderer.MeasureText(
-                dayName,
-                headerFont);
+            Size measuredSize =
+                TextRenderer.MeasureText(
+                    dayName,
+                    headerFont);
 
             maxWidth = Math.Max(
                 maxWidth,
                 measuredSize.Width);
         }
 
-        int minimumDayColumnWidth = maxWidth + 12;
-        int weekNumberWidth = _showWeekNumbers ? 40 : 0;
+        // Add horizontal space around the text.
+
+        int minimumDayColumnWidth =
+            maxWidth + 12;
+
+        // Calculate the week-number column width.
+
+        int weekNumberWidth =
+            _showWeekNumbers ? 40 : 0;
+
+        // Calculate the minimum required control width.
 
         int requiredWidth =
             weekNumberWidth +
@@ -647,16 +882,32 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
             _calendarTable.Padding.Left +
             _calendarTable.Padding.Right;
 
-        requiredWidth = Math.Max(250, requiredWidth);
+        // Keep the control at least 250 pixels wide.
+
+        requiredWidth =
+            Math.Max(
+                250,
+                requiredWidth);
+
+        // The minimum width follows the current language
+        // and the current calendar-day font.
 
         MinimumSize = new Size(
             requiredWidth,
             MinimumSize.Height);
 
+        // Resize the actual control as well.
+        // This allows the calendar to shrink after switching
+        // from a language with long day names to a language
+        // with short day names.
+
         if (Width != requiredWidth)
         {
             Width = requiredWidth;
         }
+
+        // Calculate the available width for the seven
+        // calendar-day columns.
 
         int availableWidth =
             _calendarTable.ClientSize.Width
@@ -667,17 +918,35 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         if (availableWidth <= 0)
             return;
 
-        int minimumTotalDayWidth = minimumDayColumnWidth * 7;
+        // Do not allow the columns to become narrower
+        // than the widest required day name.
 
-        if (availableWidth < minimumTotalDayWidth)
+        int minimumTotalDayWidth =
+            minimumDayColumnWidth * 7;
+
+        if (availableWidth <
+            minimumTotalDayWidth)
         {
-            availableWidth = minimumTotalDayWidth;
+            availableWidth =
+                minimumTotalDayWidth;
         }
 
-        int baseColumnWidth = availableWidth / 7;
-        int remainder = availableWidth % 7;
+        // Calculate the base width of each day column.
+
+        int baseColumnWidth =
+            availableWidth / 7;
+
+        // Calculate the remaining pixels caused by
+        // integer division.
+
+        int remainder =
+            availableWidth % 7;
+
+        // Recreate the column styles.
 
         _calendarTable.ColumnStyles.Clear();
+
+        // Create the week-number column if enabled.
 
         if (_showWeekNumbers)
         {
@@ -687,13 +956,20 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
                     weekNumberWidth));
         }
 
+        // Create the seven day columns.
+        //
+        // The last column receives any remaining pixels
+        // so there is no unused space at the end.
+
         for (int i = 0; i < 7; i++)
         {
-            int columnWidth = baseColumnWidth;
+            int columnWidth =
+                baseColumnWidth;
 
             if (i == 6)
             {
-                columnWidth += remainder;
+                columnWidth +=
+                    remainder;
             }
 
             _calendarTable.ColumnStyles.Add(
@@ -703,9 +979,154 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         }
     }
 
+    /// <summary>
+    /// Calculates and applies the required height of the calendar
+    /// according to the configured header, day and Today button fonts.
+    /// </summary>
+    private void AdjustCalendarHeight()
+    {
+        // Measure the month and year header font.
+
+        int headerTextHeight =
+            TextRenderer.MeasureText(
+                "Ag",
+                _headerFont).Height;
+
+        // Add vertical padding around the header text.
+
+        int headerHeight =
+            headerTextHeight + 16;
+
+        // Keep a reasonable minimum header height.
+
+        headerHeight =
+            Math.Max(
+                42,
+                headerHeight);
+
+        // Measure the Today button font.
+
+        int todayButtonHeight = 0;
+
+        if (_showTodayButton)
+        {
+            int todayTextHeight =
+                TextRenderer.MeasureText(
+                    "Ag",
+                    _todayButtonFont).Height;
+
+            // Add vertical padding around the Today text.
+
+            todayButtonHeight =
+                todayTextHeight + 12;
+
+            // Keep a reasonable minimum button height.
+
+            todayButtonHeight =
+                Math.Max(
+                    32,
+                    todayButtonHeight);
+        }
+
+        // Measure the calendar day font.
+
+        int dayTextHeight =
+            TextRenderer.MeasureText(
+                "Ag",
+                _dayFont).Height;
+
+        // Add vertical padding around the day number.
+
+        int dayRowHeight =
+            dayTextHeight + 8;
+
+        // Keep a reasonable minimum row height.
+
+        dayRowHeight =
+            Math.Max(
+                28,
+                dayRowHeight);
+
+        // The calendar table contains seven rows:
+        //
+        // Row 0 = day-name header
+        // Rows 1-6 = calendar weeks
+        //
+        // All seven rows use the calculated row height.
+
+        int calendarGridHeight =
+            dayRowHeight * 7;
+
+        // Add the table padding.
+
+        int tablePaddingHeight =
+            _calendarTable.Padding.Top +
+            _calendarTable.Padding.Bottom;
+
+        // Calculate the total required height.
+
+        int requiredHeight =
+            headerHeight +
+            todayButtonHeight +
+            calendarGridHeight +
+            tablePaddingHeight;
+
+        // Keep the control at least 220 pixels high.
+
+        requiredHeight =
+            Math.Max(
+                220,
+                requiredHeight);
+
+        // Update the minimum control height.
+
+        MinimumSize = new Size(
+            MinimumSize.Width,
+            requiredHeight);
+
+        // Resize the actual control.
+        //
+        // This is important when a smaller font replaces
+        // a previously larger font.
+
+        if (Height != requiredHeight)
+        {
+            Height = requiredHeight;
+        }
+
+        // Apply the calculated header height.
+
+        _headerPanel.Height =
+            headerHeight;
+
+        // Apply the calculated Today button height.
+
+        _todayButton.Height =
+            todayButtonHeight;
+
+        // Configure all seven calendar rows.
+
+        _calendarTable.RowStyles.Clear();
+
+        for (int i = 0; i < 7; i++)
+        {
+            _calendarTable.RowStyles.Add(
+                new RowStyle(
+                    SizeType.Absolute,
+                    dayRowHeight));
+        }
+    }
+
+    /// <summary>
+    /// Creates the abbreviated day-name headers
+    /// according to the current culture and first day of week.
+    /// </summary>
     private void CreateDayHeaders()
     {
-        int offset = _showWeekNumbers ? 1 : 0;
+        int offset =
+            _showWeekNumbers ? 1 : 0;
+
+        // Create the week-number header.
 
         if (_showWeekNumbers)
         {
@@ -713,8 +1134,14 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
             {
                 Text = "#",
                 Dock = DockStyle.Fill,
-                TextAlign = ContentAlignment.MiddleCenter,
-                Font = new Font(_dayFont, FontStyle.Bold),
+                TextAlign =
+                    ContentAlignment.MiddleCenter,
+
+                Font =
+                    new Font(
+                        _dayFont,
+                        FontStyle.Bold),
+
                 AutoEllipsis = false
             };
 
@@ -724,7 +1151,10 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
                 0);
         }
 
-        string[] dayNames = GetDayNames();
+        string[] dayNames =
+            GetDayNames();
+
+        // Create the seven abbreviated day-name labels.
 
         for (int i = 0; i < 7; i++)
         {
@@ -732,11 +1162,25 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
             {
                 Text = dayNames[i],
                 Dock = DockStyle.Fill,
+
+                // Keep the label on one line.
+
                 AutoSize = false,
+
+                // Do not display an ellipsis.
+
                 AutoEllipsis = false,
-                TextAlign = ContentAlignment.MiddleCenter,
-                Font = new Font(_dayFont, FontStyle.Bold),
-                Margin = new Padding(0)
+
+                TextAlign =
+                    ContentAlignment.MiddleCenter,
+
+                Font =
+                    new Font(
+                        _dayFont,
+                        FontStyle.Bold),
+
+                Margin =
+                    new Padding(0)
             };
 
             _calendarTable.Controls.Add(
@@ -746,47 +1190,78 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         }
     }
 
+    /// <summary>
+    /// Returns the seven abbreviated day names according
+    /// to the selected culture and first day of week.
+    /// </summary>
     private string[] GetDayNames()
     {
-        string[] result = new string[7];
-        DateTimeFormatInfo dtfi = _culture.DateTimeFormat;
+        string[] result =
+            new string[7];
+
+        DateTimeFormatInfo dtfi =
+            _culture.DateTimeFormat;
 
         for (int i = 0; i < 7; i++)
         {
-            DayOfWeek day = (DayOfWeek)(((int)_firstDayOfWeek + i) % 7);
-            result[i] = dtfi.GetAbbreviatedDayName(day);
+            DayOfWeek day =
+                (DayOfWeek)
+                (((int)_firstDayOfWeek + i) % 7);
+
+            result[i] =
+                dtfi.GetAbbreviatedDayName(day);
         }
 
         return result;
     }
 
+    /// <summary>
+    /// Creates the day buttons for the currently displayed month.
+    /// </summary>
     private void CreateDays()
     {
-        int offset = _showWeekNumbers ? 1 : 0;
+        int offset =
+            _showWeekNumbers ? 1 : 0;
 
-        DateTime firstOfMonth = new DateTime(
-            _displayedMonth.Year,
-            _displayedMonth.Month,
-            1);
-
-        int firstDayOffset = GetDayOffset(firstOfMonth.DayOfWeek);
-
-        int daysInMonth = DateTime.DaysInMonth(
-            _displayedMonth.Year,
-            _displayedMonth.Month);
-
-        for (int day = 1; day <= daysInMonth; day++)
-        {
-            DateTime date = new DateTime(
+        DateTime firstOfMonth =
+            new DateTime(
                 _displayedMonth.Year,
                 _displayedMonth.Month,
-                day);
+                1);
 
-            int position = firstDayOffset + day - 1;
-            int row = position / 7 + 1;
-            int column = position % 7 + offset;
+        int firstDayOffset =
+            GetDayOffset(
+                firstOfMonth.DayOfWeek);
 
-            Button button = CreateDayButton(date);
+        int daysInMonth =
+            DateTime.DaysInMonth(
+                _displayedMonth.Year,
+                _displayedMonth.Month);
+
+        for (int day = 1;
+             day <= daysInMonth;
+             day++)
+        {
+            DateTime date =
+                new DateTime(
+                    _displayedMonth.Year,
+                    _displayedMonth.Month,
+                    day);
+
+            int position =
+                firstDayOffset +
+                day -
+                1;
+
+            int row =
+                position / 7 + 1;
+
+            int column =
+                position % 7 +
+                offset;
+
+            Button button =
+                CreateDayButton(date);
 
             _calendarTable.Controls.Add(
                 button,
@@ -798,75 +1273,153 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
 
         if (_showWeekNumbers)
         {
-            CreateWeekNumbers(firstDayOffset, daysInMonth);
+            CreateWeekNumbers(
+                firstDayOffset,
+                daysInMonth);
         }
     }
 
-    private int GetDayOffset(DayOfWeek day)
+    /// <summary>
+    /// Calculates the zero-based calendar column offset
+    /// of the specified day.
+    /// </summary>
+    private int GetDayOffset(
+        DayOfWeek day)
     {
-        int first = (int)_firstDayOfWeek;
-        int current = (int)day;
+        int first =
+            (int)_firstDayOfWeek;
 
-        return (current - first + 7) % 7;
+        int current =
+            (int)day;
+
+        return
+            (current - first + 7) % 7;
     }
 
-    private Button CreateDayButton(DateTime date)
+    /// <summary>
+    /// Creates a button representing a single calendar day.
+    /// </summary>
+    private Button CreateDayButton(
+        DateTime date)
     {
-        bool isSelected = date.Date == Value.Date;
-        bool isToday = date.Date == DateTime.Today;
-        bool enabled = date >= MinDate && date <= MaxDate;
+        bool isSelected =
+            date.Date == Value.Date;
+
+        bool isToday =
+            date.Date == DateTime.Today;
+
+        bool enabled =
+            date >= MinDate &&
+            date <= MaxDate;
 
         var button = new Button
         {
-            Text = date.Day.ToString(CultureInfo.InvariantCulture),
-            Dock = DockStyle.Fill,
-            Margin = new Padding(1),
-            FlatStyle = FlatStyle.Flat,
-            Enabled = enabled,
-            Tag = date,
-            TabStop = false,
-            Font = _dayFont
+            Text =
+                date.Day.ToString(
+                    CultureInfo.InvariantCulture),
+
+            Dock =
+                DockStyle.Fill,
+
+            Margin =
+                new Padding(1),
+
+            FlatStyle =
+                FlatStyle.Flat,
+
+            Enabled =
+                enabled,
+
+            Tag =
+                date,
+
+            TabStop =
+                false,
+
+            Font =
+                _dayFont
         };
 
-        button.FlatAppearance.BorderSize = isSelected ? 1 : 0;
+        button.FlatAppearance.BorderSize =
+            isSelected ? 1 : 0;
+
+        // Highlight today's date with a bold font
+        // when it is not the selected date.
 
         if (isToday && !isSelected)
         {
-            button.Font = new Font(_dayFont, FontStyle.Bold);
+            button.Font =
+                new Font(
+                    _dayFont,
+                    FontStyle.Bold);
         }
+
+        // Highlight the selected date.
 
         if (isSelected)
         {
-            button.BackColor = SystemColors.Highlight;
-            button.ForeColor = SystemColors.HighlightText;
+            button.BackColor =
+                SystemColors.Highlight;
+
+            button.ForeColor =
+                SystemColors.HighlightText;
         }
 
-        button.Click += DayButton_Click;
+        button.Click +=
+            DayButton_Click;
 
         return button;
     }
 
-    private void CreateWeekNumbers(int firstDayOffset, int daysInMonth)
+    /// <summary>
+    /// Creates the week-number labels when week numbers
+    /// are enabled.
+    /// </summary>
+    private void CreateWeekNumbers(
+        int firstDayOffset,
+        int daysInMonth)
     {
-        DateTime firstOfMonth = new DateTime(
-            _displayedMonth.Year,
-            _displayedMonth.Month,
-            1);
+        DateTime firstOfMonth =
+            new DateTime(
+                _displayedMonth.Year,
+                _displayedMonth.Month,
+                1);
 
-        int numberOfWeeks = (firstDayOffset + daysInMonth + 6) / 7;
+        int numberOfWeeks =
+            (firstDayOffset +
+             daysInMonth +
+             6) / 7;
 
-        for (int week = 0; week < numberOfWeeks; week++)
+        for (int week = 0;
+             week < numberOfWeeks;
+             week++)
         {
-            DateTime weekDate = firstOfMonth.AddDays(week * 7 - firstDayOffset);
-            int weekNumber = GetWeekOfYear(weekDate);
+            DateTime weekDate =
+                firstOfMonth.AddDays(
+                    week * 7 -
+                    firstDayOffset);
+
+            int weekNumber =
+                GetWeekOfYear(
+                    weekDate);
 
             var label = new Label
             {
-                Text = weekNumber.ToString(CultureInfo.InvariantCulture),
-                Dock = DockStyle.Fill,
-                TextAlign = ContentAlignment.MiddleCenter,
-                ForeColor = SystemColors.GrayText,
-                Font = _dayFont
+                Text =
+                    weekNumber.ToString(
+                        CultureInfo.InvariantCulture),
+
+                Dock =
+                    DockStyle.Fill,
+
+                TextAlign =
+                    ContentAlignment.MiddleCenter,
+
+                ForeColor =
+                    SystemColors.GrayText,
+
+                Font =
+                    _dayFont
             };
 
             _calendarTable.Controls.Add(
@@ -876,28 +1429,49 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         }
     }
 
-    private int GetWeekOfYear(DateTime date)
+    /// <summary>
+    /// Calculates the week number according to the current culture.
+    /// </summary>
+    private int GetWeekOfYear(
+        DateTime date)
     {
-        Calendar calendar = _culture.Calendar;
-        CalendarWeekRule rule = _culture.DateTimeFormat.CalendarWeekRule;
-        DayOfWeek firstDay = _culture.DateTimeFormat.FirstDayOfWeek;
+        Calendar calendar =
+            _culture.Calendar;
 
-        return calendar.GetWeekOfYear(date, rule, firstDay);
+        CalendarWeekRule rule =
+            _culture.DateTimeFormat.CalendarWeekRule;
+
+        DayOfWeek firstDay =
+            _culture.DateTimeFormat.FirstDayOfWeek;
+
+        return calendar.GetWeekOfYear(
+            date,
+            rule,
+            firstDay);
     }
 
+    /// <summary>
+    /// Updates the enabled state of the previous and next
+    /// month navigation buttons.
+    /// </summary>
     private void UpdateNavigationButtons()
     {
-        DateTime firstDayOfDisplayedMonth = new DateTime(
-            _displayedMonth.Year,
-            _displayedMonth.Month,
-            1);
+        DateTime firstDayOfDisplayedMonth =
+            new DateTime(
+                _displayedMonth.Year,
+                _displayedMonth.Month,
+                1);
 
-        DateTime lastDayOfDisplayedMonth = firstDayOfDisplayedMonth
-            .AddMonths(1)
-            .AddDays(-1);
+        DateTime lastDayOfDisplayedMonth =
+            firstDayOfDisplayedMonth
+                .AddMonths(1)
+                .AddDays(-1);
 
-        _previousMonthButton.Enabled = lastDayOfDisplayedMonth >= MinDate;
-        _nextMonthButton.Enabled = firstDayOfDisplayedMonth <= MaxDate;
+        _previousMonthButton.Enabled =
+            lastDayOfDisplayedMonth >= MinDate;
+
+        _nextMonthButton.Enabled =
+            firstDayOfDisplayedMonth <= MaxDate;
     }
 
     #endregion
