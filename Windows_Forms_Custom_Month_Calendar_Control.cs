@@ -88,7 +88,8 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
             Text = "‹",
             Dock = DockStyle.Left,
             Width = 40,
-            FlatStyle = FlatStyle.Flat
+            FlatStyle = FlatStyle.Flat,
+            Font = _headerFont
         };
 
         _previousMonthButton.FlatAppearance.BorderSize = 0;
@@ -98,7 +99,8 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
             Text = "›",
             Dock = DockStyle.Right,
             Width = 40,
-            FlatStyle = FlatStyle.Flat
+            FlatStyle = FlatStyle.Flat,
+            Font = _headerFont
         };
 
         _nextMonthButton.FlatAppearance.BorderSize = 0;
