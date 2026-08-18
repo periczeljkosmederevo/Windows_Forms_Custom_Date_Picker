@@ -332,9 +332,9 @@ partial class Form1
         // 
         // windows_Forms_Custom_Date_Picker_Control1
         // 
-        windows_Forms_Custom_Date_Picker_Control1.CalendarDaysFont = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        windows_Forms_Custom_Date_Picker_Control1.CalendarHeaderFont = new Font("Segoe UI", 48F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        windows_Forms_Custom_Date_Picker_Control1.CalendarTodayButtonFont = new Font("Segoe UI", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        windows_Forms_Custom_Date_Picker_Control1.CalendarDaysFont = new Font("Comic Sans MS", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        windows_Forms_Custom_Date_Picker_Control1.CalendarHeaderFont = new Font("Comic Sans MS", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        windows_Forms_Custom_Date_Picker_Control1.CalendarTodayButtonFont = new Font("Comic Sans MS", 14.25F);
         windows_Forms_Custom_Date_Picker_Control1.Culture = new System.Globalization.CultureInfo("sr-Latn-RS");
         windows_Forms_Custom_Date_Picker_Control1.CustomFormat = "   ddd,  dd. MMMM yyyy";
         windows_Forms_Custom_Date_Picker_Control1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
