@@ -19,7 +19,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     private DateTime _maxDate = DateTime.MaxValue.Date;
     private string _customFormat = "dd.MM.yyyy";
     private DayOfWeek _firstDayOfWeek = DayOfWeek.Monday;
-    private bool _showTodayButton = true;
+    private bool _showTodayButton = false;
     private bool _showWeekNumbers = false;
     private DateTime _displayedMonth;
 

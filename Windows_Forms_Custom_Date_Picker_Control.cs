@@ -19,7 +19,7 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
     private DateTime _maxDate = DateTime.MaxValue;
 
     private DayOfWeek _firstDayOfWeek = DayOfWeek.Monday;
-    private bool _showTodayButton = true;
+    private bool _showTodayButton = false;
     private bool _showWeekNumbers;
     private bool _internalUpdate;
 
@@ -137,7 +137,7 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
 
     [Category("Appearance")]
     [Description("Determines whether the Today button is displayed in the calendar.")]
-    [DefaultValue(true)]
+    [DefaultValue(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public bool CalendarTodayButtonVisible
     {
@@ -277,7 +277,7 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
 
     [Category("Appearance")]
     [Description("Determines whether the calendar displays the Today button.")]
-    [DefaultValue(true)]
+    [DefaultValue(false)]
     public bool ShowTodayButton
     {
         get => _showTodayButton;
