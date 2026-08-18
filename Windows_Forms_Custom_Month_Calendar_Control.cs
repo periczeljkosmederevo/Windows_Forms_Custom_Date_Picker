@@ -173,7 +173,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     [Category("Appearance")]
     [Description("Font used for the calendar days.")]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-    public Font DayFont
+    public Font CalendarDaysFont
     {
         get => _dayFont;
         set
@@ -186,7 +186,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     [Category("Appearance")]
     [Description("Font used for the month and year header.")]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-    public Font HeaderFont
+    public Font CalendarHeaderFont
     {
         get => _headerFont;
         set
@@ -202,7 +202,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     [Category("Appearance")]
     [Description("Font used for the Today button.")]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-    public Font TodayButtonFont
+    public Font CalendarTodayButtonFont
     {
         get => _todayButtonFont;
         set

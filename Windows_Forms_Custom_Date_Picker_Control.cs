@@ -111,28 +111,28 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
     [Category("Appearance")]
     [Description("Font used for the calendar days.")]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-    public Font DayFont
+    public Font CalendarDayFont
     {
-        get => _calendar.DayFont;
-        set => _calendar.DayFont = value;
+        get => _calendar.CalendarDaysFont;
+        set => _calendar.CalendarDaysFont = value;
     }
 
     [Category("Appearance")]
     [Description("Font used for the month and year header.")]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-    public Font HeaderFont
+    public Font CalendarHeaderFont
     {
-        get => _calendar.HeaderFont;
-        set => _calendar.HeaderFont = value;
+        get => _calendar.CalendarHeaderFont;
+        set => _calendar.CalendarHeaderFont = value;
     }
 
     [Category("Appearance")]
     [Description("Font used for the Today button.")]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-    public Font TodayButtonFont
+    public Font CalendarTodayButtonFont
     {
-        get => _calendar.TodayButtonFont;
-        set => _calendar.TodayButtonFont = value;
+        get => _calendar.CalendarTodayButtonFont;
+        set => _calendar.CalendarTodayButtonFont = value;
     }
 
     #endregion
@@ -251,7 +251,7 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
 
     [Category("Appearance")]
     [Description("First day of the week displayed by the calendar.")]
-    [DefaultValue(DayOfWeek.Sunday)]
+    [DefaultValue(DayOfWeek.Monday)]
     public DayOfWeek FirstDayOfWeek
     {
         get => _firstDayOfWeek;
