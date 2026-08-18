@@ -37,7 +37,7 @@
 
 ### License
 
-This project is licensed under the MIT License - see the [LICENSE](https://www.google.com/search?q=https://github.com/periczeljkosmederevo/Windows_Forms_Custom_Date_Picker/blob/master/LICENSE.txt) file for details.
+This project is licensed under the [CC0-1.0 license (Public Domain)](LICENSE.txt). Feel free to use, modify, and distribute the code without any restrictions.
 
 ---
 
