@@ -484,7 +484,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     [Category("Appearance")]
     [Description(
         "Determines whether the Today button is displayed.")]
-    [DefaultValue(true)]
+    [DefaultValue(false)]
     [DesignerSerializationVisibility(
         DesignerSerializationVisibility.Visible)]
     public bool CalendarTodayButtonVisible
