@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="Windows_Forms_Custom_Date_Picker.csproj" />
+  <Project Path="Windows_Forms_Custom_Date_Picker_Test/Windows_Forms_Custom_Date_Picker_Test.csproj" />
 </Solution>
