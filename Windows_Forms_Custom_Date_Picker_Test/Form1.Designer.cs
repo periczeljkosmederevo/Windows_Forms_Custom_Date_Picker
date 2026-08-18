@@ -59,14 +59,18 @@ partial class Form1
         // 
         windows_Forms_Custom_Date_Picker_Control1.Culture = new System.Globalization.CultureInfo("sr-Latn-RS");
         windows_Forms_Custom_Date_Picker_Control1.CustomFormat = "   ddd, dd. MMMM yyyy";
+        windows_Forms_Custom_Date_Picker_Control1.DayFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 254);
         windows_Forms_Custom_Date_Picker_Control1.FirstDayOfWeek = DayOfWeek.Monday;
-        windows_Forms_Custom_Date_Picker_Control1.Location = new Point(171, 31);
-        windows_Forms_Custom_Date_Picker_Control1.Margin = new Padding(4);
+        windows_Forms_Custom_Date_Picker_Control1.Font = new Font("Yu Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        windows_Forms_Custom_Date_Picker_Control1.HeaderFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
+        windows_Forms_Custom_Date_Picker_Control1.Location = new Point(220, 43);
+        windows_Forms_Custom_Date_Picker_Control1.Margin = new Padding(5, 6, 5, 6);
         windows_Forms_Custom_Date_Picker_Control1.MaxDate = new DateTime(9999, 12, 31, 0, 0, 0, 0);
-        windows_Forms_Custom_Date_Picker_Control1.MinimumSize = new Size(154, 29);
+        windows_Forms_Custom_Date_Picker_Control1.MinimumSize = new Size(198, 41);
         windows_Forms_Custom_Date_Picker_Control1.Name = "windows_Forms_Custom_Date_Picker_Control1";
-        windows_Forms_Custom_Date_Picker_Control1.Size = new Size(242, 29);
+        windows_Forms_Custom_Date_Picker_Control1.Size = new Size(311, 41);
         windows_Forms_Custom_Date_Picker_Control1.TabIndex = 0;
+        windows_Forms_Custom_Date_Picker_Control1.TodayButtonFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 254);
         windows_Forms_Custom_Date_Picker_Control1.Value = new DateTime(2026, 8, 17, 0, 0, 0, 0);
         // 
         // LanguagesGroupBox

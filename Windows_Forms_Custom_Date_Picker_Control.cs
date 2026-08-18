@@ -91,10 +91,57 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
         UpdateText();
     }
 
+    #region Font & Appearance Properties
+
+    [Browsable(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    public override Font Font
+    {
+        get => base.Font;
+        set
+        {
+            base.Font = value;
+            if (_textBox != null)
+                _textBox.Font = value;
+            if (_calendar != null)
+                _calendar.Font = value;
+        }
+    }
+
+    [Category("Appearance")]
+    [Description("Font used for the calendar days.")]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    public Font DayFont
+    {
+        get => _calendar.DayFont;
+        set => _calendar.DayFont = value;
+    }
+
+    [Category("Appearance")]
+    [Description("Font used for the month and year header.")]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    public Font HeaderFont
+    {
+        get => _calendar.HeaderFont;
+        set => _calendar.HeaderFont = value;
+    }
+
+    [Category("Appearance")]
+    [Description("Font used for the Today button.")]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    public Font TodayButtonFont
+    {
+        get => _calendar.TodayButtonFont;
+        set => _calendar.TodayButtonFont = value;
+    }
+
+    #endregion
+
     #region Properties
 
     [Category("Behavior")]
     [Description("Culture used by the date picker.")]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     [DefaultValue(typeof(CultureInfo), "")]
     public CultureInfo Culture
     {
