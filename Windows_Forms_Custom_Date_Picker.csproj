@@ -17,6 +17,8 @@
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <IncludeSymbols>True</IncludeSymbols>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/periczeljkosmederevo/Windows_Forms_Custom_Date_Picker</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/periczeljkosmederevo/Windows_Forms_Custom_Date_Picker</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,7 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Icons\TM 500.png" />
+    <Content Include="Icons\TM 500.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
