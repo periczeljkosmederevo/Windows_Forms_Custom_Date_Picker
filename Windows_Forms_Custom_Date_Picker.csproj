@@ -9,7 +9,6 @@
 		<Authors>Perić Željko, periczeljkosmederevo@yahoo.com</Authors>
 		<Description>Custom Windows Forms DatePicker control designed for full localization support, independent of system regional settings. Allows per-control culture configuration for date and calendar display.</Description>
 		<Copyright>Copyright ©  2026</Copyright>
-		<PackageIcon>TM 500.png</PackageIcon>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>Windows Forms;Custom; DatePicker;Windows Forms Custom Date Picker</PackageTags>
 		<PackageReleaseNotes>Initial release</PackageReleaseNotes>
