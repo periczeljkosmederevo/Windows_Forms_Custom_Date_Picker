@@ -332,17 +332,17 @@ partial class Form1
         // 
         // windows_Forms_Custom_Date_Picker_Control1
         // 
+        windows_Forms_Custom_Date_Picker_Control1.CalendarDayFont = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        windows_Forms_Custom_Date_Picker_Control1.CalendarHeaderFont = new Font("Segoe UI", 12F, FontStyle.Bold);
+        windows_Forms_Custom_Date_Picker_Control1.CalendarTodayButtonFont = new Font("Segoe UI", 12F);
         windows_Forms_Custom_Date_Picker_Control1.Culture = new System.Globalization.CultureInfo("sr-Latn-RS");
         windows_Forms_Custom_Date_Picker_Control1.CustomFormat = "   ddd,  dd. MMMM yyyy";
-        windows_Forms_Custom_Date_Picker_Control1.CalendarDayFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 254);
-        windows_Forms_Custom_Date_Picker_Control1.CalendarHeaderFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
         windows_Forms_Custom_Date_Picker_Control1.Location = new Point(62, 33);
-        windows_Forms_Custom_Date_Picker_Control1.MaxDate = new DateTime(9999, 12, 31, 23, 59, 59, 999);
+        windows_Forms_Custom_Date_Picker_Control1.MaxDate = new DateTime(9999, 12, 31, 0, 0, 0, 0);
         windows_Forms_Custom_Date_Picker_Control1.MinimumSize = new Size(120, 23);
         windows_Forms_Custom_Date_Picker_Control1.Name = "windows_Forms_Custom_Date_Picker_Control1";
         windows_Forms_Custom_Date_Picker_Control1.Size = new Size(460, 29);
         windows_Forms_Custom_Date_Picker_Control1.TabIndex = 2;
-        windows_Forms_Custom_Date_Picker_Control1.CalendarTodayButtonFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 254);
         windows_Forms_Custom_Date_Picker_Control1.Value = new DateTime(2026, 8, 18, 0, 0, 0, 0);
         // 
         // Form1
