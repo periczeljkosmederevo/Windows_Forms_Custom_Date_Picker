@@ -28,7 +28,6 @@ partial class Form1
     /// </summary>
     private void InitializeComponent()
     {
-        windows_Forms_Custom_Date_Picker_Control1 = new Windows_Forms_Custom_Date_Picker.Windows_Forms_Custom_Date_Picker_Control();
         LanguagesGroupBox = new GroupBox();
         ChineseLanguageRadioButton = new RadioButton();
         VietnameseLanguageRadioButton = new RadioButton();
@@ -52,26 +51,9 @@ partial class Form1
         DeutschDeutschLanguageRadioButton = new RadioButton();
         BengaliLanguageRadioButton = new RadioButton();
         ArabicLanguageRadioButton = new RadioButton();
+        windows_Forms_Custom_Date_Picker_Control1 = new Windows_Forms_Custom_Date_Picker.Windows_Forms_Custom_Date_Picker_Control();
         LanguagesGroupBox.SuspendLayout();
         SuspendLayout();
-        // 
-        // windows_Forms_Custom_Date_Picker_Control1
-        // 
-        windows_Forms_Custom_Date_Picker_Control1.Culture = new System.Globalization.CultureInfo("sr-Latn-RS");
-        windows_Forms_Custom_Date_Picker_Control1.CustomFormat = "   ddd, dd. MMMM yyyy";
-        windows_Forms_Custom_Date_Picker_Control1.DayFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 254);
-        windows_Forms_Custom_Date_Picker_Control1.FirstDayOfWeek = DayOfWeek.Monday;
-        windows_Forms_Custom_Date_Picker_Control1.Font = new Font("Yu Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        windows_Forms_Custom_Date_Picker_Control1.HeaderFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
-        windows_Forms_Custom_Date_Picker_Control1.Location = new Point(220, 43);
-        windows_Forms_Custom_Date_Picker_Control1.Margin = new Padding(5, 6, 5, 6);
-        windows_Forms_Custom_Date_Picker_Control1.MaxDate = new DateTime(9999, 12, 31, 0, 0, 0, 0);
-        windows_Forms_Custom_Date_Picker_Control1.MinimumSize = new Size(198, 41);
-        windows_Forms_Custom_Date_Picker_Control1.Name = "windows_Forms_Custom_Date_Picker_Control1";
-        windows_Forms_Custom_Date_Picker_Control1.Size = new Size(311, 41);
-        windows_Forms_Custom_Date_Picker_Control1.TabIndex = 0;
-        windows_Forms_Custom_Date_Picker_Control1.TodayButtonFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 254);
-        windows_Forms_Custom_Date_Picker_Control1.Value = new DateTime(2026, 8, 17, 0, 0, 0, 0);
         // 
         // LanguagesGroupBox
         // 
@@ -348,13 +330,28 @@ partial class Form1
         ArabicLanguageRadioButton.UseVisualStyleBackColor = true;
         ArabicLanguageRadioButton.CheckedChanged += LanguageRadioButton_CheckedChanged;
         // 
+        // windows_Forms_Custom_Date_Picker_Control1
+        // 
+        windows_Forms_Custom_Date_Picker_Control1.Culture = new System.Globalization.CultureInfo("sr-Latn-RS");
+        windows_Forms_Custom_Date_Picker_Control1.CustomFormat = "   ddd,  dd. MMMM yyyy";
+        windows_Forms_Custom_Date_Picker_Control1.DayFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 254);
+        windows_Forms_Custom_Date_Picker_Control1.HeaderFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
+        windows_Forms_Custom_Date_Picker_Control1.Location = new Point(62, 39);
+        windows_Forms_Custom_Date_Picker_Control1.MaxDate = new DateTime(9999, 12, 31, 23, 59, 59, 999);
+        windows_Forms_Custom_Date_Picker_Control1.MinimumSize = new Size(120, 23);
+        windows_Forms_Custom_Date_Picker_Control1.Name = "windows_Forms_Custom_Date_Picker_Control1";
+        windows_Forms_Custom_Date_Picker_Control1.Size = new Size(460, 29);
+        windows_Forms_Custom_Date_Picker_Control1.TabIndex = 2;
+        windows_Forms_Custom_Date_Picker_Control1.TodayButtonFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 254);
+        windows_Forms_Custom_Date_Picker_Control1.Value = new DateTime(2026, 8, 18, 0, 0, 0, 0);
+        // 
         // Form1
         // 
         AutoScaleDimensions = new SizeF(9F, 21F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(584, 561);
-        Controls.Add(LanguagesGroupBox);
         Controls.Add(windows_Forms_Custom_Date_Picker_Control1);
+        Controls.Add(LanguagesGroupBox);
         Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
         Margin = new Padding(4);
         Name = "Form1";
@@ -365,8 +362,6 @@ partial class Form1
     }
 
     #endregion
-
-    private Windows_Forms_Custom_Date_Picker.Windows_Forms_Custom_Date_Picker_Control windows_Forms_Custom_Date_Picker_Control1;
     private GroupBox LanguagesGroupBox;
     private RadioButton ChineseLanguageRadioButton;
     private RadioButton VietnameseLanguageRadioButton;
@@ -390,4 +385,5 @@ partial class Form1
     private RadioButton DeutschDeutschLanguageRadioButton;
     private RadioButton BengaliLanguageRadioButton;
     private RadioButton ArabicLanguageRadioButton;
+    private Windows_Forms_Custom_Date_Picker.Windows_Forms_Custom_Date_Picker_Control windows_Forms_Custom_Date_Picker_Control1;
 }
