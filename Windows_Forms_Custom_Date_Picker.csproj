@@ -20,6 +20,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Windows_Forms_Custom_Date_Picker_Test\**" />
+    <EmbeddedResource Remove="Windows_Forms_Custom_Date_Picker_Test\**" />
+    <None Remove="Windows_Forms_Custom_Date_Picker_Test\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Icons\TM 500.png" />
   </ItemGroup>
 
