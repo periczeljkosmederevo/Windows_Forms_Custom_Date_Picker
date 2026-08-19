@@ -63,8 +63,7 @@ The control offers a wide range of properties that can be configured directly th
 
 #### Programmatic Example
 
-* Here is an example of how you can programmatically set the culture (which affects language translations and formatting), 
-* set an initial value, and retrieve the date chosen by the user:
+* Here is an example of how you can programmatically set the culture (which affects language translations and formatting), set an initial value, and retrieve the date chosen by the user:
 
 ```csharp
 using System.Globalization;
