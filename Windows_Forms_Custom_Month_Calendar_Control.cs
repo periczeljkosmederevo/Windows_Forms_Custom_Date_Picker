@@ -14,6 +14,98 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
 {
     #region Fields
 
+    /// <summary>
+    /// A dictionary mapping two-letter ISO language codes to their respective "Today" translation.
+    /// </summary>
+    private static readonly Dictionary<string, string> TodayTranslations =
+    new(StringComparer.OrdinalIgnoreCase)
+    {
+        ["af"] = "Vandag",     // Afrikaans
+        ["am"] = "ዛሬ",        // Amharic
+        ["ar"] = "اليوم",      // Arabic
+        ["az"] = "Bu gün",     // Azerbaijani
+        ["be"] = "Сёння",      // Belarusian
+        ["bg"] = "Днес",       // Bulgarian
+        ["bn"] = "आज",       // Bengali
+        ["bs"] = "Danas",      // Bosnian
+        ["ca"] = "Avui",       // Catalan
+        ["cs"] = "Dnes",       // Czech
+        ["cy"] = "Heddiw",     // Welsh
+        ["da"] = "I dag",      // Danish
+        ["de"] = "Heute",      // German
+        ["el"] = "Σήμερα",     // Greek
+        ["en"] = "Today",      // English
+        ["es"] = "Hoy",        // Spanish
+        ["et"] = "Täna",       // Estonian
+        ["eu"] = "Gaur",       // Basque
+        ["fa"] = "امروز",     // Persian
+        ["fi"] = "Tänään",     // Finnish
+        ["fr"] = "Aujourd'hui", // French
+        ["ga"] = "Inniu",      // Irish
+        ["gl"] = "Hoxe",       // Galician
+        ["gu"] = "આજે",      // Gujarati
+        ["he"] = "היום",      // Hebrew
+        ["hi"] = "आज",       // Hindi
+        ["hr"] = "Danas",      // Croatian
+        ["hu"] = "Ma",         // Hungarian
+        ["hy"] = "Այսօր",      // Armenian
+        ["id"] = "Hari Ini",   // Indonesian
+        ["is"] = "Í dag",      // Icelandic
+        ["it"] = "Oggi",       // Italian
+        ["ja"] = "今日",       // Japanese
+        ["jv"] = "Dina iki",   // Javanese
+        ["ka"] = "დღეს",       // Georgian
+        ["kk"] = "Бүгін",      // Kazakh
+        ["km"] = "ថ្ងៃនេះ",    // Khmer
+        ["kn"] = "ಇದೊಂದು",   // Kannada (or ಇಂದು)
+        ["ko"] = "오늘",       // Korean
+        ["ky"] = "Бүгүн",      // Kyrgyz
+        ["lo"] = "ມື້ນີ້",      // Lao
+        ["lt"] = "Šiandien",   // Lithuanian
+        ["lv"] = "Šodien",     // Latvian
+        ["mk"] = "Денес",      // Macedonian
+        ["ml"] = "ഇന്ന്",     // Malayalam
+        ["mn"] = "Өнөөдөр",    // Mongolian
+        ["mr"] = "आज",       // Marathi
+        ["ms"] = "Hari Ini",   // Malay
+        ["mt"] = "Illum",      // Maltese
+        ["my"] = "ဒီနေ့",      // Burmese
+        ["ne"] = "आज",       // Nepali
+        ["nl"] = "Vandaag",    // Dutch
+        ["no"] = "I dag",      // Norwegian
+        ["pa"] = "ਅੱਜ",       // Punjabi
+        ["pl"] = "Dzisiaj",    // Polish
+        ["ps"] = "نن",        // Pashto
+        ["pt"] = "Hoje",       // Portuguese
+        ["ro"] = "Astăzi",     // Romanian
+        ["ru"] = "Сегодня",    // Russian
+        ["sd"] = "اڄ",        // Sindhi
+        ["si"] = "අද",       // Sinhala
+        ["sk"] = "Dnes",       // Slovak
+        ["sl"] = "Danes",      // Slovenian
+        ["so"] = "Maanta",     // Somali
+        ["sq"] = "Sot",        // Albanian
+        ["sr"] = "Danas",      // Serbian (Latin/General)
+        ["su"] = "Kiwari",     // Sundanese
+        ["sv"] = "I dag",      // Swedish
+        ["sw"] = "Leo",        // Swahili
+        ["ta"] = "இன்று",     // Tamil
+        ["te"] = "ఈరోజు",    // Telugu
+        ["tg"] = "Имрӯз",      // Tajik
+        ["th"] = "วันนี้",     // Thai
+        ["tk"] = "Şu gün",     // Turkmen
+        ["tr"] = "Bugün",      // Turkish
+        ["uk"] = "Сьогодні",   // Ukrainian
+        ["ur"] = "آج",       // Urdu
+        ["uz"] = "Bugun",      // Uzbek
+        ["vi"] = "Hôm nay",    // Vietnamese
+        ["xh"] = "Namhlanje",  // Xhosa
+        ["yi"] = "היינט",     // Yiddish
+        ["yo"] = "Loni",       // Yoruba
+        ["zh"] = "今天",       // Chinese
+        ["zu"] = "Namuhla"     // Zulu
+    };
+
     private CultureInfo _culture = CultureInfo.InvariantCulture;
     private DateTime _value = DateTime.Today;
     private DateTime _minDate = DateTime.MinValue.Date;
@@ -621,46 +713,28 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     /// <summary>
     /// Retrieves the localized text for the "Today" button based on the current culture.
     /// Supports specific regional variants (e.g., Serbian Cyrillic/Latin) and 
-    /// falls back to a default switch expression for standard language codes, 
+    /// looks up standard language codes in the TodayTranslations dictionary, 
     /// defaulting to English ("Today") for unhandled cultures.
     /// </summary>
     private string GetLocalizedTodayText()
     {
-        // Obtain the full culture name and the two-letter ISO language name in lowercase.
+        // 1. Explicit check for Serbian (safest approach due to script variants)
         string cultureName = _culture.Name.ToLowerInvariant();
-        string languageCode = _culture.TwoLetterISOLanguageName.ToLowerInvariant();
-
-        // Explicitly handle Serbian regional script variants.
         if (cultureName.Contains("sr-latn") || cultureName == "sr-latn")
             return "Danas";
         if (cultureName.Contains("sr-cyrl") || cultureName == "sr-cyrl")
             return "Данас";
 
-        // Match the two-letter language code against supported translations.
-        return languageCode switch
+        // 2. Dictionary lookup for standard language codes
+        string languageCode = _culture.TwoLetterISOLanguageName.ToLowerInvariant();
+        if (TodayTranslations.TryGetValue(languageCode, out string? translation))
         {
-            "ar" => "اليوم",
-            "bn" => "आज",
-            "de" => "Heute",
-            "el" => "Σήμερα",
-            "es" => "Hoy",
-            "fr" => "Aujourd'hui",
-            "hi" => "आज",
-            "id" => "Hari Ini",
-            "it" => "Oggi",
-            "ja" => "今日",
-            "ko" => "오늘",
-            "nl" => "Vandaag",
-            "pl" => "Dzisiaj",
-            "pt" => "Hoje",
-            "ru" => "Сегодня",
-            "sr" => "Danas",
-            "sw" => "Leo",
-            "tr" => "Bugün",
-            "vi" => "Hôm nay",
-            "zh" => "今天",
-            _ => "Today" // Fallback default value for unmatched languages.
-        };
+            return translation;
+        }
+
+        // 3. Fallback: Return "Today" if the language is not found in the dictionary
+        // (Returning "Today" is safer than falling back to an incorrect translation or a day of the week name)
+        return "Today";
     }
 
     #endregion
