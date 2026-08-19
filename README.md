@@ -1,6 +1,4 @@
-Dodao sam sekciju **"Customization & Properties"** u tvoj README fajl koja na jasan i profesionalan način objašnjava sve parametre koje smo implementirali.
-
-Evo predloga ažuriranog README sadržaja:
+Evo ažuriranog README fajla. Uključio sam ispravku za `Culture` i `FirstDayOfWeek` kako smo se dogovorili, i sredio formatiranje sekcije za podešavanja kako bi bila preglednija.
 
 ---
 
@@ -14,7 +12,7 @@ Evo predloga ažuriranog README sadržaja:
 
 * **Custom Date Picker:** A robust, standalone Windows Forms control combining standard input handling with an interactive calendar drop-down.
 * **Integrated Calendar Control:** Built-in monthly calendar component designed to work seamlessly out-of-the-box with the picker interface.
-* **Culture & Regional Support:** Allows per-control culture configuration for tailored date, and calendar display based on specific regional settings.
+* **Culture & Regional Support:** Allows per-control culture configuration for tailored date and calendar display based on specific regional settings.
 * **NuGet Ready:** Structured and packaged for quick integration and easy deployment as a reusable NuGet package.
 
 ---
@@ -34,11 +32,11 @@ The control offers a wide range of properties that can be configured directly th
 
 #### Behavior & Localization
 
-* **`Culture`**: Sets the `CultureInfo` for the control, automatically adjusting language-specific day and month names, as well as the first day of the week.
+* **`Culture`**: Sets the `CultureInfo` for the control. This automatically adjusts language-specific month and day names for the calendar display.
+* **`FirstDayOfWeek`**: Defines the starting day of the week (e.g., Sunday or Monday). By default, this is set to `Monday`, but it can be configured independently of the selected `Culture`.
 * **`CustomFormat`**: Defines the string format for the date display (e.g., `"ddd, dd. MMMM yyyy"`).
 * **`Value`**: Gets or sets the currently selected date.
 * **`MinDate` / `MaxDate**`: Restricts the range of selectable dates within the calendar.
-* **`FirstDayOfWeek`**: Allows custom configuration of the starting day of the week (default is `Monday`).
 * **`CalendarTodayButtonFallbackString`**: Provides custom text for the "Today" button if the automatic culture-based translation is not desired or found.
 
 ---
@@ -67,7 +65,7 @@ The control offers a wide range of properties that can be configured directly th
 
 ### License
 
-* This project is licensed under the [CC0-1.0 license (Public Domain)](https://www.google.com/search?q=LICENSE.txt).
+* This project is licensed under the [CC0-1.0 license (Public Domain)](https://creativecommons.org/publicdomain/zero/1.0/).
 * To the extent possible under law, the author(s) have dedicated all copyright and related rights to this software to the public domain worldwide.
 * Feel free to use, modify, and distribute the code without any restrictions.
 * For more details, see the [LICENSE](https://www.google.com/search?q=LICENSE.txt) file or view the full legal text at [Creative Commons CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/).
