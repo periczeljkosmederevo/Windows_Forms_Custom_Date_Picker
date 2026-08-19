@@ -1,7 +1,3 @@
-Ažurirao sam README fajl tako da reflektuje sve najnovije promene: **Fonts** kategoriju u *Property Grid*-u, grupisana podešavanja, kao i preciznije informacije o funkcionalnostima kalendara.
-
----
-
 # Windows_Forms_Custom_Date_Picker
 
 **Windows_Forms_Custom_Date_Picker** is a specialized open-source custom control library for Windows Forms, designed to provide a highly flexible date picker component featuring an integrated, fully customizable monthly calendar.
