@@ -152,6 +152,15 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
         set => _calendar.CalendarTodayButtonVisible = value;
     }
 
+    [Category("Localization")]
+    [Description("Optional fallback text for the Today button if no translation is found.")]
+    [DefaultValue(null)]
+    public string CalendarTodayButtonFallbackString
+    {
+        get => _calendar.CalendarTodayButtonFallbackString;
+        set => _calendar.CalendarTodayButtonFallbackString = value;
+    }
+
     #endregion
 
     #region Properties

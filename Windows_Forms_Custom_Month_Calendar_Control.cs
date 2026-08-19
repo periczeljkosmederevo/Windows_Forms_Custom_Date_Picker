@@ -113,6 +113,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     private string _customFormat = "   ddd,  dd. MMMM yyyy";
     private DayOfWeek _firstDayOfWeek = DayOfWeek.Monday;
     private bool _showTodayButton = false;
+    private string _todayButtonFallbackString = "Today";
     private bool _showWeekNumbers = false;
     private DateTime _displayedMonth;
 
@@ -297,6 +298,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
             UpdateCalendar();
         }
     }
+
     /// <summary>
     /// Gets or sets the font used for calendar day numbers
     /// and abbreviated day names.
@@ -610,6 +612,15 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         }
     }
 
+    [Category("Localization")]
+    [Description("Optional fallback text for the Today button if no translation is found.")]
+    [DefaultValue(null)]
+    public string CalendarTodayButtonFallbackString
+    {
+        get => _todayButtonFallbackString;
+        set => _todayButtonFallbackString = value;
+    }
+
     /// <summary>
     /// Gets or sets a value indicating whether week numbers
     /// are displayed.
@@ -718,23 +729,22 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     /// </summary>
     private string GetLocalizedTodayText()
     {
-        // Explicit check for Serbian (safest approach due to script variants)
         string cultureName = _culture.Name.ToLowerInvariant();
         if (cultureName.Contains("sr-latn") || cultureName == "sr-latn")
             return "Danas";
         if (cultureName.Contains("sr-cyrl") || cultureName == "sr-cyrl")
             return "Данас";
 
-        // Dictionary lookup for standard language codes
         string languageCode = _culture.TwoLetterISOLanguageName.ToLowerInvariant();
         if (TodayTranslations.TryGetValue(languageCode, out string? translation))
         {
             return translation;
         }
 
-        // Fallback: Return "Today" if the language is not found in the dictionary
-        // (Returning "Today" is safer than falling back to an incorrect translation or a day of the week name)
-        return "Today";
+        // Return the user-defined fallback string if it exists, otherwise "Today"
+        return !string.IsNullOrEmpty(_todayButtonFallbackString)
+            ? _todayButtonFallbackString
+            : "Today";
     }
 
     #endregion
