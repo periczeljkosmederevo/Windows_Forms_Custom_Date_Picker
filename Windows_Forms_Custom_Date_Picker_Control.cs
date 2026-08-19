@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Windows_Forms_Custom_Date_Picker;
 
@@ -95,16 +96,22 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
 
     [Browsable(true)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [AllowNull]
     public override Font Font
     {
         get => base.Font;
         set
         {
             base.Font = value;
+
+            Font effectiveFont =
+            value ?? SystemFonts.DefaultFont;
+
             if (_textBox != null)
-                _textBox.Font = value;
+                _textBox.Font = effectiveFont;
+
             if (_calendar != null)
-                _calendar.Font = value;
+                _calendar.Font = effectiveFont;
         }
     }
 

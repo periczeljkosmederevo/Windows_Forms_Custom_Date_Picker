@@ -332,20 +332,18 @@ partial class Form1
         // 
         // windows_Forms_Custom_Date_Picker_Control1
         // 
-        windows_Forms_Custom_Date_Picker_Control1.CalendarDaysFont = new Font("Comic Sans MS", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        windows_Forms_Custom_Date_Picker_Control1.CalendarHeaderFont = new Font("Comic Sans MS", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-        windows_Forms_Custom_Date_Picker_Control1.CalendarTodayButtonFont = new Font("Comic Sans MS", 14.25F, FontStyle.Bold | FontStyle.Italic);
+        windows_Forms_Custom_Date_Picker_Control1.CalendarDaysFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 254);
+        windows_Forms_Custom_Date_Picker_Control1.CalendarHeaderFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
+        windows_Forms_Custom_Date_Picker_Control1.CalendarTodayButtonFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 254);
         windows_Forms_Custom_Date_Picker_Control1.CalendarTodayButtonVisible = true;
         windows_Forms_Custom_Date_Picker_Control1.Culture = new System.Globalization.CultureInfo("sr-Latn-RS");
-        windows_Forms_Custom_Date_Picker_Control1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        windows_Forms_Custom_Date_Picker_Control1.Location = new Point(134, 46);
-        windows_Forms_Custom_Date_Picker_Control1.Margin = new Padding(5, 6, 5, 6);
+        windows_Forms_Custom_Date_Picker_Control1.Location = new Point(62, 49);
         windows_Forms_Custom_Date_Picker_Control1.MaxDate = new DateTime(9999, 12, 31, 0, 0, 0, 0);
         windows_Forms_Custom_Date_Picker_Control1.MinimumSize = new Size(120, 23);
         windows_Forms_Custom_Date_Picker_Control1.Name = "windows_Forms_Custom_Date_Picker_Control1";
-        windows_Forms_Custom_Date_Picker_Control1.Size = new Size(297, 29);
+        windows_Forms_Custom_Date_Picker_Control1.Size = new Size(460, 29);
         windows_Forms_Custom_Date_Picker_Control1.TabIndex = 2;
-        windows_Forms_Custom_Date_Picker_Control1.Value = new DateTime(2026, 8, 18, 0, 0, 0, 0);
+        windows_Forms_Custom_Date_Picker_Control1.Value = new DateTime(2026, 8, 19, 0, 0, 0, 0);
         // 
         // Form1
         // 

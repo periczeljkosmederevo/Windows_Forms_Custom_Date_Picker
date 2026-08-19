@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Windows_Forms_Custom_Date_Picker;
 
@@ -175,6 +176,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     [Browsable(true)]
     [DesignerSerializationVisibility(
         DesignerSerializationVisibility.Visible)]
+    [AllowNull]
     public override Font Font
     {
         get => base.Font;
@@ -183,23 +185,26 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         {
             base.Font = value;
 
+            Font effectiveFont =
+            value ?? SystemFonts.DefaultFont;
+
             if (_monthYearLabel != null)
             {
                 _monthYearLabel.Font =
                     new Font(
-                        value,
+                        effectiveFont,
                         FontStyle.Bold);
             }
 
             if (_todayButton != null)
             {
-                _todayButton.Font = value;
+                _todayButton.Font =
+                    effectiveFont;
             }
 
             UpdateCalendar();
         }
     }
-
     /// <summary>
     /// Gets or sets the font used for calendar day numbers
     /// and abbreviated day names.
