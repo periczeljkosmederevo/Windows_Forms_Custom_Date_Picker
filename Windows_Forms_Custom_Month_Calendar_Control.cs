@@ -718,21 +718,21 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     /// </summary>
     private string GetLocalizedTodayText()
     {
-        // 1. Explicit check for Serbian (safest approach due to script variants)
+        // Explicit check for Serbian (safest approach due to script variants)
         string cultureName = _culture.Name.ToLowerInvariant();
         if (cultureName.Contains("sr-latn") || cultureName == "sr-latn")
             return "Danas";
         if (cultureName.Contains("sr-cyrl") || cultureName == "sr-cyrl")
             return "Данас";
 
-        // 2. Dictionary lookup for standard language codes
+        // Dictionary lookup for standard language codes
         string languageCode = _culture.TwoLetterISOLanguageName.ToLowerInvariant();
         if (TodayTranslations.TryGetValue(languageCode, out string? translation))
         {
             return translation;
         }
 
-        // 3. Fallback: Return "Today" if the language is not found in the dictionary
+        // Fallback: Return "Today" if the language is not found in the dictionary
         // (Returning "Today" is safer than falling back to an incorrect translation or a day of the week name)
         return "Today";
     }
