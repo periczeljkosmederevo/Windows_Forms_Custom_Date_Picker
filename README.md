@@ -55,10 +55,6 @@ The control offers a wide range of properties that can be configured directly th
 
 ---
 
-Evo dopunjene **USAGE** sekcije za tvoj README fajl koja uključuje jasan C# primer koda za postavljanje kulture, setovanje vrednosti i preuzimanje izabranog datuma od strane korisnika:
-
----
-
 ### Usage
 
 1. Add the control library reference or install the package into your Windows Forms application.
