@@ -55,11 +55,36 @@ The control offers a wide range of properties that can be configured directly th
 
 ---
 
+Evo dopunjene **USAGE** sekcije za tvoj README fajl koja uključuje jasan C# primer koda za postavljanje kulture, setovanje vrednosti i preuzimanje izabranog datuma od strane korisnika:
+
+---
+
 ### Usage
 
 1. Add the control library reference or install the package into your Windows Forms application.
 2. Drag and drop the custom picker control from the toolbox onto your form layout.
 3. Configure properties such as culture settings, fonts, date formats, or visual styles directly via the designer or programmatically in code.
+
+#### Programmatic Example
+
+Evo primera kako možete programski podesiti kulturu (što utiče na jezičke prevode i format), postaviti početnu vrednost i preuzeti datum koji je korisnik izabrao:
+
+```csharp
+using System.Globalization;
+
+// 1. Set the culture for regional formatting and translations (e.g., Serbian Latin)
+customDatePicker1.Culture = new CultureInfo("sr-Latn-RS");
+
+// 2. Set a specific date value programmatically
+customDatePicker1.Value = new DateTime(2026, 8, 19);
+
+// 3. Get the selected DateTime value chosen by the user
+DateTime selectedDate = customDatePicker1.Value;
+
+// Alternatively, get the formatted text representation based on CustomFormat and Culture
+string formattedText = customDatePicker1.GetFormattedValue();
+
+```
 
 ---
 
