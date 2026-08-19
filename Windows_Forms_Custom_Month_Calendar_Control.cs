@@ -1033,7 +1033,6 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         }
 
         // Add horizontal space around the text.
-
         int minimumDayColumnWidth =
             maxWidth + 12;
 
@@ -1050,7 +1049,6 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         }
 
         // Calculate the minimum required control width.
-
         int requiredWidth =
             weekNumberWidth +
             (minimumDayColumnWidth * 7) +
@@ -1058,7 +1056,6 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
             _calendarTable.Padding.Right;
 
         // Keep the control at least 250 pixels wide.
-
         requiredWidth =
             Math.Max(
                 250,
@@ -1066,7 +1063,6 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
 
         // The minimum width follows the current language
         // and the current calendar-day font.
-
         MinimumSize = new Size(
             requiredWidth,
             MinimumSize.Height);
@@ -1079,7 +1075,6 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
 
         // Calculate the available width for the seven
         // calendar-day columns.
-
         int availableWidth =
             _calendarTable.ClientSize.Width
             - _calendarTable.Padding.Left
