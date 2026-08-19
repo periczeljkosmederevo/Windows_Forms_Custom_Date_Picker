@@ -11,7 +11,7 @@
 		<Copyright>Copyright ©  2026</Copyright>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>Windows Forms;Custom; DatePicker;Windows Forms Custom Date Picker</PackageTags>
-		<PackageReleaseNotes>Initial release</PackageReleaseNotes>
+		<PackageReleaseNotes>Expanded functionality and improved localization support.</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<IncludeSymbols>True</IncludeSymbols>
@@ -19,7 +19,7 @@
 		<PackageProjectUrl>https://github.com/periczeljkosmederevo/Windows_Forms_Custom_Date_Picker</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/periczeljkosmederevo/Windows_Forms_Custom_Date_Picker</RepositoryUrl>
 		<PackageIcon>TM 500.png</PackageIcon>
-		<Version>1.0.0</Version>
+		<Version>1.0.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
