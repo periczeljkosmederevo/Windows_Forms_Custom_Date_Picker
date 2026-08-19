@@ -332,10 +332,11 @@ partial class Form1
         // 
         // windows_Forms_Custom_Date_Picker_Control1
         // 
-        windows_Forms_Custom_Date_Picker_Control1.CalendarDaysFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 254);
-        windows_Forms_Custom_Date_Picker_Control1.CalendarHeaderFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
+        windows_Forms_Custom_Date_Picker_Control1.CalendarDaysFont = new Font("Amiri", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        windows_Forms_Custom_Date_Picker_Control1.CalendarHeaderFont = new Font("Microsoft Sans Serif", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        windows_Forms_Custom_Date_Picker_Control1.CalendarShowWeekNumbers = true;
         windows_Forms_Custom_Date_Picker_Control1.CalendarTodayButtonFallbackString = "Back to Today";
-        windows_Forms_Custom_Date_Picker_Control1.CalendarTodayButtonFont = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 254);
+        windows_Forms_Custom_Date_Picker_Control1.CalendarTodayButtonFont = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
         windows_Forms_Custom_Date_Picker_Control1.CalendarTodayButtonVisible = true;
         windows_Forms_Custom_Date_Picker_Control1.Culture = new System.Globalization.CultureInfo("sr-Latn-RS");
         windows_Forms_Custom_Date_Picker_Control1.Location = new Point(62, 36);

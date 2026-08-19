@@ -41,7 +41,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         ["az"] = "Bu gün",     // Azerbaijani
         ["be"] = "Сёння",      // Belarusian
         ["bg"] = "Днес",       // Bulgarian
-        ["bn"] = "आज",       // Bengali
+        ["bn"] = "आज",        // Bengali
         ["bs"] = "Danas",      // Bosnian
         ["ca"] = "Avui",       // Catalan
         ["cs"] = "Dnes",       // Czech
@@ -60,7 +60,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         ["gl"] = "Hoxe",       // Galician
         ["gu"] = "આજે",      // Gujarati
         ["he"] = "היום",      // Hebrew
-        ["hi"] = "आज",       // Hindi
+        ["hi"] = "आज",        // Hindi
         ["hr"] = "Danas",      // Croatian
         ["hu"] = "Ma",         // Hungarian
         ["hy"] = "Այսօր",      // Armenian
@@ -81,21 +81,21 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         ["mk"] = "Денес",      // Macedonian
         ["ml"] = "ഇന്ന്",     // Malayalam
         ["mn"] = "Өнөөдөр",    // Mongolian
-        ["mr"] = "आज",       // Marathi
+        ["mr"] = "आज",        // Marathi
         ["ms"] = "Hari Ini",   // Malay
         ["mt"] = "Illum",      // Maltese
         ["my"] = "ဒီနေ့",      // Burmese
-        ["ne"] = "आज",       // Nepali
+        ["ne"] = "आज",        // Nepali
         ["nl"] = "Vandaag",    // Dutch
         ["no"] = "I dag",      // Norwegian
-        ["pa"] = "ਅੱਜ",       // Punjabi
+        ["pa"] = "ਅੱਜ",        // Punjabi
         ["pl"] = "Dzisiaj",    // Polish
         ["ps"] = "نن",        // Pashto
         ["pt"] = "Hoje",       // Portuguese
         ["ro"] = "Astăzi",     // Romanian
         ["ru"] = "Сегодня",    // Russian
         ["sd"] = "اڄ",        // Sindhi
-        ["si"] = "අද",       // Sinhala
+        ["si"] = "අද",        // Sinhala
         ["sk"] = "Dnes",       // Slovak
         ["sl"] = "Danes",      // Slovenian
         ["so"] = "Maanta",     // Somali
@@ -104,14 +104,14 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         ["su"] = "Kiwari",     // Sundanese
         ["sv"] = "I dag",      // Swedish
         ["sw"] = "Leo",        // Swahili
-        ["ta"] = "இன்று",     // Tamil
+        ["ta"] = "இன்று",      // Tamil
         ["te"] = "ఈరోజు",    // Telugu
         ["tg"] = "Имрӯз",      // Tajik
         ["th"] = "วันนี้",     // Thai
         ["tk"] = "Şu gün",     // Turkmen
         ["tr"] = "Bugün",      // Turkish
         ["uk"] = "Сьогодні",   // Ukrainian
-        ["ur"] = "آج",       // Urdu
+        ["ur"] = "آج",        // Urdu
         ["uz"] = "Bugun",      // Uzbek
         ["vi"] = "Hôm nay",    // Vietnamese
         ["xh"] = "Namhlanje",  // Xhosa
@@ -281,6 +281,8 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     /// <summary>
     /// Gets or sets the base font of the calendar control.
     /// </summary>
+    [Category("Fonts")]
+    [Description("Base font for the control.")]
     [Browsable(true)]
     [DesignerSerializationVisibility(
         DesignerSerializationVisibility.Visible)]
@@ -318,7 +320,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     /// Gets or sets the font used for calendar day numbers
     /// and abbreviated day names.
     /// </summary>
-    [Category("Appearance")]
+    [Category("Fonts")]
     [Description(
         "Font used for the calendar days.")]
     [DesignerSerializationVisibility(
@@ -339,7 +341,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     /// <summary>
     /// Gets or sets the font used for the month and year header.
     /// </summary>
-    [Category("Appearance")]
+    [Category("Fonts")]
     [Description(
         "Font used for the month and year header.")]
     [DesignerSerializationVisibility(
@@ -378,7 +380,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     /// <summary>
     /// Gets or sets the font used for the Today button.
     /// </summary>
-    [Category("Appearance")]
+    [Category("Fonts")]
     [Description(
         "Font used for the Today button.")]
     [DesignerSerializationVisibility(
@@ -1001,7 +1003,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
 
     /// <summary>
     /// Calculates and applies the required width of the calendar
-    /// according to the longest abbreviated day name.
+    /// according to the longest abbreviated day name and week numbers.
     /// </summary>
     private void AdjustDayColumnWidths()
     {
@@ -1035,10 +1037,17 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         int minimumDayColumnWidth =
             maxWidth + 12;
 
-        // Calculate the week-number column width.
+        // Dynamically calculate the week number column width based on the font and number size.
+        int weekNumberWidth = 0;
+        if (_showWeekNumbers)
+        {
+            Size weekMeasuredSize =
+                TextRenderer.MeasureText(
+                    "##", // Measure with two characters to ensure enough room for two-digit week numbers.
+                    headerFont);
 
-        int weekNumberWidth =
-            _showWeekNumbers ? 40 : 0;
+            weekNumberWidth = Math.Max(40, weekMeasuredSize.Width + 12);
+        }
 
         // Calculate the minimum required control width.
 
@@ -1063,10 +1072,6 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
             MinimumSize.Height);
 
         // Resize the actual control as well.
-        // This allows the calendar to shrink after switching
-        // from a language with long day names to a language
-        // with short day names.
-
         if (Width != requiredWidth)
         {
             Width = requiredWidth;
@@ -1084,9 +1089,6 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         if (availableWidth <= 0)
             return;
 
-        // Do not allow the columns to become narrower
-        // than the widest required day name.
-
         int minimumTotalDayWidth =
             minimumDayColumnWidth * 7;
 
@@ -1097,22 +1099,13 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
                 minimumTotalDayWidth;
         }
 
-        // Calculate the base width of each day column.
-
         int baseColumnWidth =
             availableWidth / 7;
-
-        // Calculate the remaining pixels caused by
-        // integer division.
 
         int remainder =
             availableWidth % 7;
 
-        // Recreate the column styles.
-
         _calendarTable.ColumnStyles.Clear();
-
-        // Create the week-number column if enabled.
 
         if (_showWeekNumbers)
         {
@@ -1121,11 +1114,6 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
                     SizeType.Absolute,
                     weekNumberWidth));
         }
-
-        // Create the seven day columns.
-        //
-        // The last column receives any remaining pixels
-        // so there is no unused space at the end.
 
         for (int i = 0; i < 7; i++)
         {
