@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
-using System.Globalization;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 
 namespace Windows_Forms_Custom_Date_Picker;
 
@@ -8,13 +8,25 @@ namespace Windows_Forms_Custom_Date_Picker;
 [DefaultEvent(nameof(ValueChanged))]
 public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
 {
+    #region Constants
+
+    private const string DefaultCustomFormat = "    ddd,  dd. MMMM yyyy";
+    private const string DropDownButtonSymbol = "▼";
+    private const string ErrorMinGreaterThanMax = "MinDate cannot be greater than MaxDate.";
+    private const string ErrorMaxLessThanMin = "MaxDate cannot be less than MinDate.";
+    private const string ErrorCustomFormatNullOrEmpty = "CustomFormat cannot be null or empty.";
+
+    #endregion
+
+    #region Fields
+
     private readonly TextBox _textBox;
     private readonly Button _dropDownButton;
     private readonly Windows_Forms_Custom_Month_Calendar_Control _calendar;
     private readonly ToolStripDropDown _popup;
 
     private CultureInfo _culture = CultureInfo.CurrentCulture;
-    private string _customFormat = "   ddd,  dd. MMMM yyyy";
+    private string _customFormat = DefaultCustomFormat;
     private DateTime _value = DateTime.Today;
     private DateTime _minDate = DateTime.MinValue;
     private DateTime _maxDate = DateTime.MaxValue;
@@ -24,6 +36,13 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
     private bool _showWeekNumbers;
     private bool _internalUpdate;
 
+    #endregion
+
+    #region Constructor
+
+    /// <summary>
+    /// Initializes a new instance of the custom date picker control.
+    /// </summary>
     public Windows_Forms_Custom_Date_Picker_Control()
     {
         InitializeComponent();
@@ -46,7 +65,7 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
 
         _dropDownButton = new Button
         {
-            Text = "▼",
+            Text = DropDownButtonSymbol,
             Dock = DockStyle.Right,
             Width = 30,
             TabStop = false,
@@ -91,6 +110,8 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
 
         UpdateText();
     }
+
+    #endregion
 
     #region Font & Appearance Properties
 
@@ -188,14 +209,14 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
 
     [Category("Appearance")]
     [Description("Format used to display the selected date.")]
-    [DefaultValue("   ddd,  dd. MMMM yyyy")]
+    [DefaultValue(DefaultCustomFormat)]
     public string CustomFormat
     {
         get => _customFormat;
         set
         {
             if (string.IsNullOrWhiteSpace(value))
-                throw new ArgumentException("CustomFormat cannot be null or empty.", nameof(value));
+                throw new ArgumentException(ErrorCustomFormatNullOrEmpty, nameof(value));
 
             if (_customFormat == value)
                 return;
@@ -246,7 +267,7 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
         set
         {
             if (value > _maxDate)
-                throw new ArgumentException("MinDate cannot be greater than MaxDate.", nameof(value));
+                throw new ArgumentException(ErrorMinGreaterThanMax, nameof(value));
 
             _minDate = value.Date;
             _calendar.MinDate = _minDate;
@@ -265,7 +286,7 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
         set
         {
             if (value < _minDate)
-                throw new ArgumentException("MaxDate cannot be less than MinDate.", nameof(value));
+                throw new ArgumentException(ErrorMaxLessThanMin, nameof(value));
 
             _maxDate = value.Date;
             _calendar.MaxDate = _maxDate;
@@ -411,7 +432,7 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
         }
         catch (FormatException)
         {
-            _textBox.Text = _value.ToString("   ddd,  dd. MMMM yyyy", _culture);
+            _textBox.Text = _value.ToString(DefaultCustomFormat, _culture);
         }
     }
 

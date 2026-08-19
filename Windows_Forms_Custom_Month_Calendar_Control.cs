@@ -12,6 +12,21 @@ namespace Windows_Forms_Custom_Date_Picker;
 /// </summary>
 internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
 {
+    #region Constants
+
+    private const string DefaultCustomFormat = "    ddd,  dd. MMMM yyyy";
+    private const string DefaultTodayButtonFallback = "Today";
+    private const string SerbianLatinToday = "Danas";
+    private const string SerbianCyrillicToday = "Данас";
+    private const string PreviousButtonSymbol = "‹";
+    private const string NextButtonSymbol = "›";
+    private const string MonthYearHeaderFormat = "MMMM yyyy";
+    private const string WeekNumberHeaderSymbol = "#";
+    private const string ErrorMinGreaterThanMax = "MinDate cannot be greater than MaxDate.";
+    private const string ErrorMaxLessThanMin = "MaxDate cannot be less than MinDate.";
+
+    #endregion
+
     #region Fields
 
     /// <summary>
@@ -57,7 +72,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         ["ka"] = "დღეს",       // Georgian
         ["kk"] = "Бүгін",      // Kazakh
         ["km"] = "ថ្ងៃនេះ",    // Khmer
-        ["kn"] = "ಇದೊಂದು",   // Kannada (or ಇಂದು)
+        ["kn"] = "ಇದೊಂದು",   // Kannada (or ಇಂದು)
         ["ko"] = "오늘",       // Korean
         ["ky"] = "Бүгүн",      // Kyrgyz
         ["lo"] = "ມື້ນີ້",      // Lao
@@ -110,10 +125,10 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     private DateTime _value = DateTime.Today;
     private DateTime _minDate = DateTime.MinValue.Date;
     private DateTime _maxDate = DateTime.MaxValue.Date;
-    private string _customFormat = "   ddd,  dd. MMMM yyyy";
+    private string _customFormat = DefaultCustomFormat;
     private DayOfWeek _firstDayOfWeek = DayOfWeek.Monday;
     private bool _showTodayButton = false;
-    private string _todayButtonFallbackString = "Today";
+    private string _todayButtonFallbackString = DefaultTodayButtonFallback;
     private bool _showWeekNumbers = false;
     private DateTime _displayedMonth;
 
@@ -179,7 +194,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
 
         _previousMonthButton = new Button
         {
-            Text = "‹",
+            Text = PreviousButtonSymbol,
             Dock = DockStyle.Left,
             Width = 40,
             FlatStyle = FlatStyle.Flat,
@@ -190,7 +205,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
 
         _nextMonthButton = new Button
         {
-            Text = "›",
+            Text = NextButtonSymbol,
             Dock = DockStyle.Right,
             Width = 40,
             FlatStyle = FlatStyle.Flat,
@@ -432,7 +447,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     [Category("Appearance")]
     [Description(
         "Format used when the selected date is represented as text.")]
-    [DefaultValue("   ddd,  dd. MMMM yyyy")]
+    [DefaultValue(DefaultCustomFormat)]
     [DesignerSerializationVisibility(
         DesignerSerializationVisibility.Visible)]
     public string CustomFormat
@@ -443,7 +458,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         {
             _customFormat =
                 string.IsNullOrWhiteSpace(value)
-                    ? "   ddd,  dd. MMMM yyyy"
+                    ? DefaultCustomFormat
                     : value;
 
             Invalidate();
@@ -512,7 +527,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
             if (newValue > _maxDate)
             {
                 throw new ArgumentException(
-                    "MinDate cannot be greater than MaxDate.");
+                    ErrorMinGreaterThanMax);
             }
 
             _minDate = newValue;
@@ -544,7 +559,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
             if (newValue < _minDate)
             {
                 throw new ArgumentException(
-                    "MaxDate cannot be less than MinDate.");
+                    ErrorMaxLessThanMin);
             }
 
             _maxDate = newValue;
@@ -612,13 +627,16 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         }
     }
 
+    /// <summary>
+    /// Gets or sets the fallback text for the Today button.
+    /// </summary>
     [Category("Localization")]
     [Description("Optional fallback text for the Today button if no translation is found.")]
-    [DefaultValue(null)]
+    [DefaultValue(DefaultTodayButtonFallback)]
     public string CalendarTodayButtonFallbackString
     {
         get => _todayButtonFallbackString;
-        set => _todayButtonFallbackString = value;
+        set => _todayButtonFallbackString = string.IsNullOrEmpty(value) ? DefaultTodayButtonFallback : value;
     }
 
     /// <summary>
@@ -725,15 +743,15 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
     /// Retrieves the localized text for the "Today" button based on the current culture.
     /// Supports specific regional variants (e.g., Serbian Cyrillic/Latin) and 
     /// looks up standard language codes in the TodayTranslations dictionary, 
-    /// defaulting to English ("Today") for unhandled cultures.
+    /// defaulting to the fallback string for unhandled cultures.
     /// </summary>
     private string GetLocalizedTodayText()
     {
         string cultureName = _culture.Name.ToLowerInvariant();
         if (cultureName.Contains("sr-latn") || cultureName == "sr-latn")
-            return "Danas";
+            return SerbianLatinToday;
         if (cultureName.Contains("sr-cyrl") || cultureName == "sr-cyrl")
-            return "Данас";
+            return SerbianCyrillicToday;
 
         string languageCode = _culture.TwoLetterISOLanguageName.ToLowerInvariant();
         if (TodayTranslations.TryGetValue(languageCode, out string? translation))
@@ -741,10 +759,10 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
             return translation;
         }
 
-        // Return the user-defined fallback string if it exists, otherwise "Today"
+        // Return the user-defined fallback string if it exists, otherwise the default fallback constant
         return !string.IsNullOrEmpty(_todayButtonFallbackString)
             ? _todayButtonFallbackString
-            : "Today";
+            : DefaultTodayButtonFallback;
     }
 
     #endregion
@@ -949,7 +967,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
 
             _monthYearLabel.Text =
                 _displayedMonth.ToString(
-                    "MMMM yyyy",
+                    MonthYearHeaderFormat,
                     _culture);
 
             // Make sure the dedicated fonts
@@ -1280,7 +1298,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         {
             var weekHeader = new Label
             {
-                Text = "#",
+                Text = WeekNumberHeaderSymbol,
                 Dock = DockStyle.Fill,
                 TextAlign =
                     ContentAlignment.MiddleCenter,
