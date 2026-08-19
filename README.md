@@ -63,7 +63,8 @@ The control offers a wide range of properties that can be configured directly th
 
 #### Programmatic Example
 
-Evo primera kako možete programski podesiti kulturu (što utiče na jezičke prevode i format), postaviti početnu vrednost i preuzeti datum koji je korisnik izabrao:
+* Here is an example of how you can programmatically set the culture (which affects language translations and formatting), 
+* set an initial value, and retrieve the date chosen by the user:
 
 ```csharp
 using System.Globalization;
