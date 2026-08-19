@@ -112,7 +112,7 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
 
     #endregion
 
-    #region Font & Appearance Properties
+    #region Font Properties
 
     [Category("Fonts")]
     [Description("Base font for the control.")]
@@ -163,6 +163,10 @@ public partial class Windows_Forms_Custom_Date_Picker_Control : UserControl
         get => _calendar.CalendarTodayButtonFont;
         set => _calendar.CalendarTodayButtonFont = value;
     }
+
+    #endregion
+
+    #region Appearance Properties
 
     [Category("Appearance")]
     [Description("Determines whether the Today button is displayed in the calendar.")]
