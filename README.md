@@ -53,7 +53,7 @@ The control offers a wide range of properties that can be configured directly th
 
 #### Installation
 
-* Clone the repository: `git clone` [https://github.com/periczeljkosmederevo/Windows_Forms_Custom_Date_Picker.git](https://github.com/periczeljkosmederevo/Windows_Forms_Custom_Date_Picker.git)
+* Clone the repository: [`git clone`](https://github.com/periczeljkosmederevo/Windows_Forms_Custom_Date_Picker.git)
 * Open the project solution in Visual Studio.
 * Build the project or generate the NuGet package locally via the **Pack** option.
 
