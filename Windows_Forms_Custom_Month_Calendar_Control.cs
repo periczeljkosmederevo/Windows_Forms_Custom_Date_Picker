@@ -41,7 +41,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         ["az"] = "Bu gün",     // Azerbaijani
         ["be"] = "Сёння",      // Belarusian
         ["bg"] = "Днес",       // Bulgarian
-        ["bn"] = "आज",        // Bengali
+        ["bn"] = "আজ",        // Bengali
         ["bs"] = "Danas",      // Bosnian
         ["ca"] = "Avui",       // Catalan
         ["cs"] = "Dnes",       // Czech
@@ -64,7 +64,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         ["hr"] = "Danas",      // Croatian
         ["hu"] = "Ma",         // Hungarian
         ["hy"] = "Այսօր",      // Armenian
-        ["id"] = "Hari Ini",   // Indonesian
+        ["id"] = "Hari ini",   // Indonesian
         ["is"] = "Í dag",      // Icelandic
         ["it"] = "Oggi",       // Italian
         ["ja"] = "今日",       // Japanese
@@ -72,7 +72,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         ["ka"] = "დღეს",       // Georgian
         ["kk"] = "Бүгін",      // Kazakh
         ["km"] = "ថ្ងៃនេះ",    // Khmer
-        ["kn"] = "ಇದೊಂದು",   // Kannada (or ಇಂದು)
+        ["kn"] = "ಇಂದು",      // Kannada
         ["ko"] = "오늘",       // Korean
         ["ky"] = "Бүгүн",      // Kyrgyz
         ["lo"] = "ມື້ນີ້",      // Lao
@@ -82,7 +82,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         ["ml"] = "ഇന്ന്",     // Malayalam
         ["mn"] = "Өнөөдөр",    // Mongolian
         ["mr"] = "आज",        // Marathi
-        ["ms"] = "Hari Ini",   // Malay
+        ["ms"] = "Hari ini",   // Malay
         ["mt"] = "Illum",      // Maltese
         ["my"] = "ဒီနေ့",      // Burmese
         ["ne"] = "आज",        // Nepali
@@ -116,7 +116,7 @@ internal partial class Windows_Forms_Custom_Month_Calendar_Control : UserControl
         ["vi"] = "Hôm nay",    // Vietnamese
         ["xh"] = "Namhlanje",  // Xhosa
         ["yi"] = "היינט",     // Yiddish
-        ["yo"] = "Loni",       // Yoruba
+        ["yo"] = "Lónìì",       // Yoruba
         ["zh"] = "今天",       // Chinese
         ["zu"] = "Namuhla"     // Zulu
     };
